@@ -1,6 +1,7 @@
 import { Jost, Montserrat } from "next/font/google";
 import Header from "@/shared/components/layout/Header";
 import "./globals.css";
+import Footer from "@/shared/components/layout/Footer";
 
 const jost = Jost({
     subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
         <body className="font-sans">
         <Header />
         {children}
+        <Footer/>
         </body>
         </html>
     );
