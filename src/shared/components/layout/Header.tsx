@@ -20,12 +20,13 @@ export default function Header() {
             <div className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-6 lg:px-10">
 
                 {/* Logo */}
-                <Link href="/" className="relative h-20 w-44 shrink-0 lg:h-25 lg:w-52">
+                <Link href="/" className="relative shrink-0">
                     <Image
                         src="/assets/shared/logo/logo.png"
                         alt="Impact Roofing"
-                        fill
-                        className="object-contain object-left"
+                        width={1038}  // Ancho original
+                        height={732}  // Alto original
+                        className="h-16 w-auto lg:h-24" // Controlas el alto, el ancho se ajusta solo
                         priority
                     />
                 </Link>
