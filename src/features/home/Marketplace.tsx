@@ -1,10 +1,3 @@
-import { Montserrat } from "next/font/google";
-
-const montserrat = Montserrat({
-    subsets: ["latin"],
-    weight: ["500", "600", "700", "800"],
-});
-
 const TRADITIONAL_ITEMS = [
     "Endless Follow-Ups",
     "Unclear Pricing",
@@ -23,17 +16,15 @@ const ADVANCED_ITEMS = [
 
 export default function Marketplace() {
     return (
-        <section
-            className={`relative w-full bg-[#011C2D] py-20 lg:py-28 ${montserrat.className}`}
-        >
+        <section className="relative w-full bg-[#011C2D] py-20 lg:py-28">
             <div className="mx-auto max-w-6xl px-6 lg:px-10">
-                <p className="text-sm font-bold tracking-[0.15em] text-[#F2733A]">
+                <p className="text-md font-semibold tracking-[0.15em] text-[#F2733A]">
                     A MODERN MARKETPLACE
                 </p>
-                <h2 className="mt-3 text-4xl font-extrabold leading-tight text-white lg:text-5xl">
+                <h2 className="mt-3 font-jost text-4xl font-medium leading-tight text-white lg:text-6xl">
                     Everything Your Roof Needs.
                 </h2>
-                <p className="mt-3 max-w-xl text-base text-white/70">
+                <p className="mt-3 max-w-xl text-lg text-white">
                     From your free inspection to the final installation, we make the
                     roofing process simple, transparent, and stress-free.
                 </p>
@@ -41,15 +32,15 @@ export default function Marketplace() {
                 <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
                     {/* The Traditional Way */}
                     <div className="flex flex-col overflow-hidden">
-                        <div className="flex flex-col items-center gap-2 bg-gradient-to-br from-[#1E4E76] to-[#2F739E] px-8 py-10 text-center">
-                            <p className="text-sm font-semibold uppercase tracking-wide text-white/90">
+                        <div className="flex h-72 flex-col items-center justify-center gap-2 bg-gradient-to-br from-[#1E4E76] to-[#2F739E] px-8 text-center lg:h-70">
+                            <p className="text-md font-semibold uppercase tracking-wide text-white/90">
                                 The Traditional Way
                             </p>
-                            <p className="text-5xl font-extrabold text-white lg:text-6xl">
+                            <p className="text-5xl font-extrabold font-jost text-white lg:text-8xl">
                                 Weeks
                             </p>
-                            <p className="text-sm text-white/85">
-                                Waiting for Inspections &amp; Roofing Decisions
+                            <p className="text-lg text-white/85">
+                                Waiting for Inspections &amp; <br/> Roofing Decisions
                             </p>
                         </div>
 
@@ -67,21 +58,23 @@ export default function Marketplace() {
 
                     {/* The Advanced Way */}
                     <div className="flex flex-col overflow-hidden">
-                        <div className="flex items-center justify-center bg-[#EDEDED] px-8 py-4">
-                            <p className="text-sm font-extrabold tracking-wide text-[#0B2545]">
-                                THE ADVANCED WAY
-                            </p>
-                        </div>
+                        <div className="flex h-72 flex-col lg:h-70">
+                            <div className="flex items-center justify-center bg-[#EDEDED] px-8 py-4">
+                                <p className="text-lg font-extrabold tracking-wide text-[#0B2545]">
+                                    THE ADVANCED WAY
+                                </p>
+                            </div>
 
-                        <div className="flex flex-col items-center gap-2 bg-[#F3752B] px-8 py-10 text-center">
-                            <p className="text-5xl font-extrabold leading-tight text-[#0B2545] lg:text-6xl">
-                                Free
-                                <br />
-                                Inspection
-                            </p>
-                            <p className="text-sm font-medium text-[#0B2545]/90">
-                                Fast, Honest Roofing Solutions
-                            </p>
+                            <div className="flex flex-1 flex-col items-center justify-center gap-2 bg-[#F3752B] px-8 text-center">
+                                <p className="text-5xl font-extrabold font-jost  text-[#011C2D] lg:text-7xl">
+                                    Free
+                                    <br />
+                                    Inspection
+                                </p>
+                                <p className="text-lg font-medium text-[#0B2545]/90">
+                                    Fast, Honest Roofing Solutions
+                                </p>
+                            </div>
                         </div>
 
                         <div className="flex flex-1 flex-col gap-4 bg-[#F3752B] px-8 pb-8 pt-6">
