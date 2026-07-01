@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const TRADITIONAL_ITEMS = [
     "Endless Follow-Ups",
     "Unclear Pricing",
@@ -89,8 +91,41 @@ export default function Marketplace() {
                         </div>
                     </div>
                 </div>
+
+                <div className="flex justify-center mt-10">
+                    <Link
+                        href="/quote"
+                        className="inline-flex items-center gap-3 rounded-full bg-[#0B2545] px-8 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-[1.03]"
+                    >
+                        LET&apos;S GET STARTED
+                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545]">
+                            <ArrowIcon />
+                        </span>
+                    </Link>
+                </div>
+
             </div>
         </section>
+    );
+}
+
+function ArrowIcon() {
+    return (
+        <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M5 12H19M19 12L13 6M19 12L13 18"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
     );
 }
 

@@ -38,7 +38,7 @@ export default function HowItWorks() {
             className={`relative w-full overflow-hidden bg-[#011C2D] py-20 lg:py-28 ${montserrat.className}`}
         >
             {/* Soft radial glow behind the content, matching the reference */}
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_50%,rgba(94,158,201,0.08),transparent_70%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_50%_50%,rgba(94,158,201,0.15),transparent_70%)]" />
 
             <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-10">
                 <p className="text-sm font-bold tracking-[0.15em] text-[#F2733A]">
@@ -59,7 +59,7 @@ export default function HowItWorks() {
                                 className={`mt-3 flex aspect-square w-full items-center justify-center rounded-xl ${
                                     step.highlighted
                                         ? "bg-[#8ED2EE]"
-                                        : "border border-white/10 bg-[#011C2D]"
+                                        : "bg-[#011C2D]" // Se eliminó 'border border-white/10' de aquí
                                 }`}
                             >
                                 <div

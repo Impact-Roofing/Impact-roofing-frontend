@@ -50,8 +50,8 @@ export default function Header() {
                 >
                     GET A QUOTE
                     <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#0B2545] text-white">
-            <ArrowIcon />
-          </span>
+                        <ArrowIcon />
+                    </span>
                 </Link>
 
                 {/* Mobile toggle */}
