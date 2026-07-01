@@ -58,22 +58,22 @@ export default function Map() {
 
                 {/* Content */}
                 <div className="relative z-10 flex w-full max-w-3xl flex-col items-center px-6 pb-16 text-center">
-                    <h2 className="text-3xl font-bold leading-tight text-white lg:text-4xl">
+                    <h2 className="text-3xl font-semibold font-jost leading-tight text-white lg:text-5xl tracking-[0.04em]">
                         Serving Chicago and
                         <br />
                         the Surrounding Areas.
                     </h2>
 
-                    <p className="mt-2 text-3xl font-light text-white/40 lg:text-4xl">
+                    <p className="mt-2 font-semibold font-jost text-3xl text-white/40 lg:text-5xl tracking-[0.04em]">
                         Trusted roofing solutions
                     </p>
 
-                    <div className="mt-10 flex items-center gap-4">
-            <span className="text-xs font-medium tracking-wide text-white/60">
-              20+ years working with you
-            </span>
+                    <div className="mt-10 flex items-center gap-6">
+                        <span className="text-lg font-medium tracking-wide text-white/60">
+                          20+ years working with you
+                        </span>
 
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-4">
                             <SocialIcon href="https://instagram.com" label="Instagram">
                                 <InstagramIcon />
                             </SocialIcon>
@@ -109,7 +109,7 @@ function SocialIcon({
             target="_blank"
             rel="noopener noreferrer"
             aria-label={label}
-            className="flex h-9 w-9 items-center justify-center rounded-md bg-white/95 text-[#011C2D] transition-transform hover:scale-105"
+            className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-b from-[#16324A] to-[#0A2138] text-[#F2733A] shadow-lg transition-transform hover:scale-105"
         >
             {children}
         </a>
@@ -118,7 +118,7 @@ function SocialIcon({
 
 function InstagramIcon() {
     return (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
             <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.8" />
             <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
             <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" />
@@ -128,7 +128,7 @@ function InstagramIcon() {
 
 function FacebookIcon() {
     return (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
             <path
                 d="M14 8.5h2V5.5h-2c-2.2 0-4 1.8-4 4V12H8v3h2v6h3v-6h2.2l.8-3H13v-2.2c0-.7.3-1.3 1-1.3Z"
                 fill="currentColor"
@@ -139,7 +139,7 @@ function FacebookIcon() {
 
 function XIcon() {
     return (
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
             <path
                 d="M4 4l7.5 8.5L4.2 20H6l6-6.6L17 20h3l-7.8-8.9L19.6 4H18l-5.6 6.2L7 4H4Z"
                 fill="currentColor"
