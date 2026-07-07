@@ -53,7 +53,7 @@ export default function Footer() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Facebook"
-                                className="text-[#001321] transition-transform hover:scale-105"
+                                className="flex h-7 w-7 items-center justify-center rounded-md bg-[#001321] text-white transition-transform hover:scale-105"
                             >
                                 <FacebookIcon />
                             </a>
@@ -145,7 +145,7 @@ function LinkedInIcon() {
 
 function FacebookIcon() {
     return (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"> {/* FORZAMOS BLANCO AQUÍ */}
             <path d="M14 8.5h2V5.5h-2c-2.2 0-4 1.8-4 4V12H8v3h2v6h3v-6h2.2l.8-3H13v-2.2c0-.7.3-1.3 1-1.3Z" />
         </svg>
     );
