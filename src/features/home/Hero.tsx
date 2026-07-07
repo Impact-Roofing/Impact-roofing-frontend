@@ -48,9 +48,22 @@ export default function Hero() {
 
                     <Link
                         href="/contact"
-                        className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-white to-[#BEE6F5] px-8 py-4 text-lg font-semibold tracking-wide text-[#0B2545] shadow-lg transition-transform hover:scale-[1.03]"
+                        className="group mt-4 inline-flex items-center gap-6 rounded-full pl-8 pr-2 py-3 text-lg font-bold tracking-wide text-white transition-all hover:scale-[1.03]"
+                        style={{
+                            // Fondo de vidrio semitransparente
+                            background: "rgba(255, 255, 255, 0.15)",
+                            // Borde fino para definir la forma
+                            // Desenfoque para el efecto glass
+                            backdropFilter: "blur(12px)",
+                            WebkitBackdropFilter: "blur(12px)",
+                            // Sombra suave para darle elevación
+                            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.08)"
+                        }}
                     >
                         LET&apos;S GET STARTED
+                        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545] transition-transform group-hover:translate-x-1">
+        <ArrowIcon />
+    </span>
                     </Link>
                 </div>
             </div>
@@ -61,8 +74,8 @@ export default function Hero() {
 function ArrowIcon() {
     return (
         <svg
-            width="12"
-            height="12"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
