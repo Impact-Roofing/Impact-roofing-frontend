@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Map() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
     const hasPlayedRef = useRef(false);
 
+    // Reproduce el video una sola vez cuando la sección entra en pantalla
     useEffect(() => {
         const section = sectionRef.current;
         const video = videoRef.current;
@@ -30,6 +32,59 @@ export default function Map() {
         return () => observer.disconnect();
     }, []);
 
+    // Parallax: el bloque de texto sube (de abajo hacia arriba) a medida que
+    // se hace scroll a través de la sección. Usa la posición de scroll (no el
+    // ratio de intersección) porque el ratio es simétrico — sube y luego baja
+    // otra vez al salir la sección, lo que provocaba que el contenido
+    // "rebotara" hacia abajo en vez de seguir subiendo. Con rect.top el
+    // movimiento es monótono: mientras bajas, solo sube.
+    useEffect(() => {
+        const section = sectionRef.current;
+        const content = contentRef.current;
+        if (!section || !content) return;
+
+        let ticking = false;
+
+        const clamp = (value: number, min: number, max: number) =>
+            Math.min(max, Math.max(min, value));
+
+        const RANGE = 360; // recorrido total: +160px (abajo) a -160px (arriba)
+
+        const update = () => {
+            const rect = section.getBoundingClientRect();
+            const viewportH = window.innerHeight;
+
+            // progress: 0 justo cuando la sección empieza a asomar por abajo,
+            // 1 justo cuando termina de salir por arriba. Clampeado para que
+            // no se dispare fuera de rango mientras la sección no es visible,
+            // y para que al llegar a 1 se quede fijo ahí (sin rebotar).
+            const progress = clamp(
+                (viewportH - rect.top) / (viewportH + rect.height),
+                0,
+                1
+            );
+
+            const offset = (0.5 - progress) * RANGE * 2;
+            content.style.transform = `translate3d(0, ${offset}px, 0)`;
+            ticking = false;
+        };
+
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(update);
+                ticking = true;
+            }
+        };
+
+        update();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", onScroll);
+        };
+    }, []);
+
     return (
         <div className="relative w-full">
             {/* Solid container above the video — the section's top gradient fades into this */}
@@ -37,7 +92,7 @@ export default function Map() {
 
             <section
                 ref={sectionRef}
-                className="relative flex min-h-[820px] w-full items-end justify-center overflow-hidden bg-[#011C2D]"
+                className="relative flex min-h-[820px] w-full items-end justify-center bg-[#011C2D]"
             >
                 {/* Background video — plays once when in view, freezes on last frame */}
                 <video
@@ -56,8 +111,34 @@ export default function Map() {
                 {/* Bottom gradient — fades from the video into the solid container below */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-[#011C2D] via-[#011C2D]/90 to-transparent" />
 
-                {/* Content */}
-                <div className="relative z-10 flex w-full max-w-3xl flex-col items-center px-6 pb-16 text-center">
+                {/* Content, con parallax hacia arriba */}
+                <div
+                    ref={contentRef}
+                    className="relative z-10 flex h-full w-full max-w-5xl flex-col items-center px-6 pb-46 text-center will-change-transform"
+                >
+                    {/* Blur degradado detrás del texto — mucho más amplio ahora,
+                        cubre prácticamente todo el bloque de contenido */}
+                    <div
+                        className="pointer-events-none absolute -inset-x-24 -inset-y-24 -z-10"
+                        style={{
+                            backdropFilter: "blur(40px)",
+                            WebkitBackdropFilter: "blur(100px)",
+                            maskImage:
+                                "radial-gradient(ellipse 55% 60% at 55% 55%, black 45%, transparent 100%)",
+                            WebkitMaskImage:
+                                "radial-gradient(ellipse 55% 49% at 50% 55%, black 45%, transparent 100%)",
+                        }}
+                    />
+                    <div
+                        className="pointer-events-none absolute -inset-x-24 -inset-y-24 -z-10 bg-[#011C2D]/55"
+                        style={{
+                            maskImage:
+                                "radial-gradient(ellipse 65% 60% at 50% 50%, black 35%, transparent 100%)",
+                            WebkitMaskImage:
+                                "radial-gradient(ellipse 65% 60% at 50% 50%, black 35%, transparent 100%)",
+                        }}
+                    />
+
                     <h2 className="text-3xl font-semibold font-jost leading-tight text-white lg:text-5xl tracking-[0.04em]">
                         Serving Chicago and
                         <br />

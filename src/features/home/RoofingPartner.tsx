@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const CHECKLIST_ITEMS = [
-    "Free Roof Inspections",
+    "Free Quote",
     "Honest Pricing",
     "Certified Roofing Experts",
 ];

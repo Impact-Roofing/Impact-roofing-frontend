@@ -27,7 +27,7 @@ export default function Hero() {
             {/* Content: Alineado exactamente igual que el header */}
             <div className="relative z-10 mx-auto w-full max-w-[1500px] px-6 lg:px-16">
                 <div className="max-w-xl">
-                    <h1 className="text-5xl font-jost font-medium leading-[1.05] text-white lg:text-8xl">
+                    <h1 className="text-5xl font-jost font-medium text-white lg:text-8xl">
                         The Easiest
                         <br />
                         Way to
@@ -42,9 +42,13 @@ export default function Hero() {
                         the way.
                     </p>
 
+                    <p className="mt-8 text-3xl font-jost font-medium text-[#011C2D]">
+                        Start with a Free Quote
+                    </p>
+
                     <Link
                         href="/contact"
-                        className="mt-8 inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-white to-[#BEE6F5] px-8 py-4 text-lg font-semibold tracking-wide text-[#0B2545] shadow-lg transition-transform hover:scale-[1.03]"
+                        className="mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-white to-[#BEE6F5] px-8 py-4 text-lg font-semibold tracking-wide text-[#0B2545] shadow-lg transition-transform hover:scale-[1.03]"
                     >
                         LET&apos;S GET STARTED
                     </Link>

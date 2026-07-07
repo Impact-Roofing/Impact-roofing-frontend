@@ -1,5 +1,6 @@
 // features/home/HomeContainer.tsx
 import Hero from "./Hero";
+import CloudsTransition from "./CloudsTransition";
 import Map from "./Map";
 import HowItWorks from "@/features/home/HowItWorks";
 import Marketplace from "@/features/home/Marketplace";

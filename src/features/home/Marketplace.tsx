@@ -9,7 +9,7 @@ const TRADITIONAL_ITEMS = [
 ];
 
 const ADVANCED_ITEMS = [
-    "Free Roof Inspection",
+    "Free Quote",
     "Clear, Upfront Pricing",
     "Certified Roofing Experts",
     "Premium Materials",
@@ -27,7 +27,7 @@ export default function Marketplace() {
                     Everything Your Roof Needs.
                 </h2>
                 <p className="mt-3 max-w-xl text-lg text-white">
-                    From your free inspection to the final installation, we make the
+                    From your free quote to the final installation, we make the
                     roofing process simple, transparent, and stress-free.
                 </p>
 
@@ -71,7 +71,7 @@ export default function Marketplace() {
                                 <p className="text-5xl font-extrabold font-jost  text-[#011C2D] lg:text-7xl">
                                     Free
                                     <br />
-                                    Inspection
+                                    Quote
                                 </p>
                                 <p className="text-lg font-medium text-[#0B2545]/90">
                                     Fast, Honest Roofing Solutions

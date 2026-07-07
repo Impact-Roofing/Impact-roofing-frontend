@@ -6,7 +6,7 @@ const FAQ_ITEMS = [
     {
         question: "What Is Impact Roofing?",
         answer:
-            "Impact Roofing is a Chicago-based roofing contractor that makes the entire roofing process simple and transparent. From your free inspection to the final nail, we handle inspections, insurance guidance, and installation with one dedicated team.",
+            "Impact Roofing is a Chicago-based roofing contractor that makes the entire roofing process simple and transparent. From your free quote to the final nail, we handle inspections, insurance guidance, and installation with one dedicated team.",
     },
     {
         question: "How Does The Process Work?",
@@ -29,7 +29,7 @@ export default function FAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     return (
-        <section className="w-full bg-white py-20 lg:py-28">
+        <section  id="site-footer" className="relative z-50 w-full bg-white py-20 lg:py-28">
             <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 lg:grid-cols-[320px_1fr] lg:gap-20 lg:px-10">
                 {/* Left — heading */}
                 <div>

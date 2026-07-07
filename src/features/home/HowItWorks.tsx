@@ -8,9 +8,9 @@ const montserrat = Montserrat({
 const STEPS = [
     {
         number: "1",
-        title: "Schedule Your Free Inspection",
+        title: "Schedule Your Free Quote",
         description:
-            "Book your free roof inspection online or give us a call. Our team will assess your roof, identify any issues, and provide honest recommendations tailored to your home.",
+            "Book your free quote online or give us a call. Our team will assess your roof, identify any issues, and provide honest recommendations tailored to your home.",
         highlighted: false,
         icon: <SearchClipboardIcon />,
     },

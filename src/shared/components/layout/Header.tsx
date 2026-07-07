@@ -15,18 +15,17 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <header className="absolute top-0 left-0 z-30 w-full">
+        <header className="absolute top-0 left-0 z-50 w-full">
 
             <div className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-6 lg:px-10">
 
                 {/* Logo */}
-                <Link href="/" className="relative shrink-0">
+                <Link href="/" className="relative h-20 w-44 shrink-0 lg:h-24 lg:w-52">
                     <Image
                         src="/assets/shared/logo/logo.png"
                         alt="Impact Roofing"
-                        width={1038}  // Ancho original
-                        height={732}  // Alto original
-                        className="h-16 w-auto lg:h-24" // Controlas el alto, el ancho se ajusta solo
+                        fill
+                        className="object-contain object-left"
                         priority
                     />
                 </Link>
