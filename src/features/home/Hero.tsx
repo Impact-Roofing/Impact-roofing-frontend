@@ -43,13 +43,9 @@ export default function Hero() {
                         the way.
                     </p>
 
-                    <p className="mt-8 text-3xl font-jost font-medium text-[#011C2D]">
-                        Start with a Free Quote
-                    </p>
-
                     <Link
                         href="/contact"
-                        className="group mt-4 inline-flex items-center gap-6 rounded-full pl-8 pr-2 py-3 text-lg font-bold tracking-wide text-white transition-all hover:scale-[1.03]"
+                        className="group mt-8 inline-flex items-center gap-6 rounded-full pl-8 pr-2 py-3 text-lg font-bold tracking-wide text-white transition-all hover:scale-[1.03]"
                         style={{
                             // Fondo de vidrio semitransparente
                             background: "rgba(255, 255, 255, 0.15)",

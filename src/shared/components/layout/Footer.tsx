@@ -1,17 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const SERVICE_LINKS = [
-    { label: "Residential Roofing", href: "/services/residential" },
-    { label: "Commercial Roofing", href: "/services/commercial" },
-    { label: "Storm Damage Repair", href: "/services/storm-damage" },
-    { label: "Roof Replacement", href: "/services/replacement" },
+const SOLUTIONS_LINKS = [
+    { label: "For Homeowners", href: "/services/homeowners" },
+    { label: "For Insurance Claims", href: "/services/insurance-claims" },
+    { label: "For Insurance Agents", href: "/services/insurance-agents" },
+    { label: "For Real Estate", href: "/services/real-estate" },
+    { label: "For Contractors", href: "/services/contractors" },
 ];
 
-const QUICK_LINKS = [
-    { label: "About Us", href: "/about" },
-    { label: "Our Projects", href: "/projects" },
-    { label: "Careers", href: "/careers" },
+const COMPANY_LINKS = [
+    { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
 ];
 
@@ -60,11 +59,11 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Our Services */}
-                    <FooterColumn title="Our Services" links={SERVICE_LINKS} />
+                    {/* Solutions — mismos sub-links que el dropdown del header */}
+                    <FooterColumn title="Solutions" links={SOLUTIONS_LINKS} />
 
-                    {/* Quick Links */}
-                    <FooterColumn title="Quick Links" links={QUICK_LINKS} />
+                    {/* Company — About / Contact, igual que el nav principal */}
+                    <FooterColumn title="Company" links={COMPANY_LINKS} />
 
                     {/* Get In Touch */}
                     <div>

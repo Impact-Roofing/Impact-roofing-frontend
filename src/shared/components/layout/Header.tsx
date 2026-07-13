@@ -14,8 +14,7 @@ type NavLink = {
 const NAV_LINKS: NavLink[] = [
     {
         label: "ABOUT",
-        href: "/about",
-        dropdown: [{ label: "Our Story", href: "/about" }],
+        href: "/about"
     },
     {
         label: "SOLUTIONS",
