@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 type NavLink = {
     label: string;
@@ -11,7 +12,11 @@ type NavLink = {
 };
 
 const NAV_LINKS: NavLink[] = [
-    { label: "ABOUT", href: "/about" },
+    {
+        label: "ABOUT",
+        href: "/about",
+        dropdown: [{ label: "Our Story", href: "/about" }],
+    },
     {
         label: "SOLUTIONS",
         href: "/services",
@@ -47,30 +52,7 @@ export default function Header() {
                 <nav className="hidden items-center gap-10 lg:flex">
                     {NAV_LINKS.map((link) =>
                         link.dropdown ? (
-                            <div key={link.href} className="group relative">
-                                <button
-                                    type="button"
-                                    className="flex items-center gap-1 text-sm font-semibold tracking-wide text-white transition-colors "
-                                >
-                                    {link.label}
-                                    <ChevronIcon className="transition-transform duration-200 group-hover:rotate-180" />
-                                </button>
-
-                                {/* Panel — aparece al hacer hover sobre el item */}
-                                <div className="invisible absolute left-1/2 top-full mt-3 w-56 -translate-x-1/2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100">
-                                    <div className="rounded-xl border border-white/15 bg-white/10 py-2 shadow-xl backdrop-blur-md">
-                                        {link.dropdown.map((item) => (
-                                            <Link
-                                                key={item.href}
-                                                href={item.href}
-                                                className="block px-4 py-2 text-sm text-white/90 transition-colors hover:bg-white/10 hover:text-white"
-                                            >
-                                                {item.label}
-                                            </Link>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
+                            <NavDropdown key={link.href} link={link} />
                         ) : (
                             <Link
                                 key={link.href}
@@ -88,19 +70,16 @@ export default function Header() {
                     href="/quote"
                     className="group hidden items-center gap-4 rounded-full pl-8 pr-2 py-2 text-sm font-bold tracking-wide text-white transition-all hover:scale-[1.03] lg:flex"
                     style={{
-                        // Fondo translúcido pero con más cuerpo
                         background: "rgba(255, 255, 255, 0.15)",
                         backdropFilter: "blur(12px)",
                         WebkitBackdropFilter: "blur(12px)",
-
-                        boxShadow: "0 8px 20px rgba(0, 0, 0, 0.05)"
-                        // Sombra suave para separar del fondo
+                        boxShadow: "0 8px 20px rgba(0, 0, 0, 0.05)",
                     }}
                 >
                     GET A QUOTE
                     <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545] transition-transform group-hover:rotate-[-10deg]">
-        <ArrowIcon />
-    </span>
+                        <ArrowIcon />
+                    </span>
                 </Link>
 
                 {/* Mobile toggle */}
@@ -160,6 +139,95 @@ export default function Header() {
                 </div>
             )}
         </header>
+    );
+}
+
+// Dropdown con Portal: el panel se renderiza directamente en <body>, fuera
+// del <header> (que tiene z-50 y por lo tanto es su propio contexto de
+// apilamiento). Así el backdrop-filter del panel puede "ver" y desenfocar
+// la foto del Hero de verdad, en vez de quedar encerrado sin nada detrás.
+function NavDropdown({ link }: { link: NavLink }) {
+    const [open, setOpen] = useState(false);
+    const [position, setPosition] = useState({ top: 0, left: 0 });
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const clearCloseTimeout = () => {
+        if (closeTimeoutRef.current) {
+            clearTimeout(closeTimeoutRef.current);
+            closeTimeoutRef.current = null;
+        }
+    };
+
+    const openDropdown = () => {
+        clearCloseTimeout();
+        const rect = triggerRef.current?.getBoundingClientRect();
+        if (rect) {
+            setPosition({ top: rect.bottom + 12, left: rect.left });
+        }
+        setOpen(true);
+    };
+
+    const scheduleClose = () => {
+        clearCloseTimeout();
+        closeTimeoutRef.current = setTimeout(() => setOpen(false), 150);
+    };
+
+    // Cierra el dropdown si el usuario hace scroll (evita que quede
+    // "flotando" en una posición vieja mientras la página se mueve).
+    useEffect(() => {
+        if (!open) return;
+        const onScroll = () => setOpen(false);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, [open]);
+
+    useEffect(() => clearCloseTimeout, []);
+
+    return (
+        <div onMouseEnter={openDropdown} onMouseLeave={scheduleClose}>
+            <button
+                ref={triggerRef}
+                type="button"
+                className="flex items-center gap-1 text-sm font-semibold tracking-wide text-white transition-colors"
+            >
+                {link.label}
+                <ChevronIcon
+                    className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+                />
+            </button>
+
+            {open &&
+                typeof document !== "undefined" &&
+                createPortal(
+                    <div
+                        onMouseEnter={clearCloseTimeout}
+                        onMouseLeave={scheduleClose}
+                        className="fixed z-[100] w-auto min-w-[190px]"
+                        style={{ top: position.top, left: position.left }}
+                    >
+                        <div
+                            className="flex flex-col gap-0.5 overflow-hidden rounded-xl border border-white/10 p-1 shadow-lg shadow-black/10"
+                            style={{
+                                background: "rgba(255,255,255,0.1)",
+                                backdropFilter: "blur(20px)",
+                                WebkitBackdropFilter: "blur(20px)",
+                            }}
+                        >
+                            {link.dropdown!.map((item) => (
+                                <Link
+                                    key={item.href}
+                                    href={item.href}
+                                    className="flex h-10 w-full select-none items-center justify-start whitespace-nowrap rounded-[10px] border border-transparent px-4 text-sm font-medium text-white/70 transition-all duration-150 ease-in-out hover:border-white/10 hover:bg-white/10 hover:text-white active:scale-[0.98]"
+                                >
+                                    {item.label}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>,
+                    document.body
+                )}
+        </div>
     );
 }
 

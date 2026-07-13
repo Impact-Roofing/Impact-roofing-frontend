@@ -51,8 +51,8 @@ export default function Marketplace() {
                                 <div key={item} className="flex items-center gap-3">
                                     <XCircleIcon />
                                     <span className="text-base font-medium text-[#0B2545]">
-                    {item}
-                  </span>
+                                        {item}
+                                    </span>
                                 </div>
                             ))}
                         </div>

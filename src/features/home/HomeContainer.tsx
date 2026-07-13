@@ -1,6 +1,6 @@
 // features/home/HomeContainer.tsx
 import Hero from "./Hero";
-import CloudsTransition from "./CloudsTransition";
+import HeroToMapBridge from "./HeroToMapBridge";
 import Map from "./Map";
 import HowItWorks from "@/features/home/HowItWorks";
 import Marketplace from "@/features/home/Marketplace";
@@ -14,6 +14,7 @@ export default function HomeContainer() {
     return (
         <main>
             <Hero />
+            <HeroToMapBridge imageName="hero-clouds-bridge_17.png" />
             <Map/>
             <HowItWorks/>
             <Marketplace/>

@@ -3,13 +3,14 @@ import Link from "next/link";
 
 export default function Hero() {
     return (
-        // Usamos h-screen (100vh) para desktop/tablet y dejamos el contenido flexible
-        <section className="relative flex h-screen w-full items-center overflow-hidden">
+        // h-[130vh] en vez de h-screen (100vh) — la sección mide un 30% más
+        // que la altura del viewport.
+        <section className="relative flex h-[120vh] w-full items-center overflow-hidden">
 
             {/* Background image container */}
-            <div className="absolute inset-0 w-full h-screen">
+            <div className="absolute inset-0 h-[120vh] w-full">
                 <Image
-                    src="/assets/features/home/hero/hero_3.png"
+                    src="/assets/features/home/hero/hero_4.png"
                     alt="Roofer installing a new roof"
                     fill
                     priority
