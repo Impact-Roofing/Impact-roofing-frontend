@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function Map() {
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -145,7 +146,7 @@ export default function Map() {
                         the Surrounding Areas.
                     </h2>
 
-                    <p className="mt-2 font-semibold font-jost text-3xl text-white/40 lg:text-5xl tracking-[0.04em]">
+                    <p className="mt-2 font-semibold font-jost text-3xl text-white/60 lg:text-5xl tracking-[0.04em]">
                         Trusted roofing solutions
                     </p>
 
@@ -168,6 +169,18 @@ export default function Map() {
                     </div>
                 </div>
             </section>
+
+
+            <div className="relative z-10 h-0 w-full">
+                <div className="absolute inset-x-0 top-0 aspect-[2/1] w-full -translate-y-1/2">
+                    <Image
+                        src={`/assets/features/home/hero/hero-clouds-bridge_25.png`}
+                        alt=""
+                        fill
+                        className="object-cover"
+                    />
+                </div>
+            </div>
 
             {/* Solid container below the video — the section's bottom gradient fades into this */}
             <div className="h-24 w-full bg-[#011C2D] lg:h-32" />
