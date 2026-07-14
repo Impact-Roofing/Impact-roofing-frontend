@@ -30,7 +30,7 @@ export default function FAQ() {
 
     return (
         <section  id="site-footer" className="relative z-50 w-full bg-white py-20 lg:py-28">
-            <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 lg:grid-cols-[320px_1fr] lg:gap-20 lg:px-10">
+            <div id="faq" className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 lg:grid-cols-[320px_1fr] lg:gap-20 lg:px-10">
                 {/* Left — heading */}
                 <div>
                     <h2 className="font-jost text-3xl font-extrabold leading-tight text-[#0B2545] lg:text-4xl">

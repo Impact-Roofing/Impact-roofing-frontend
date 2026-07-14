@@ -14,10 +14,10 @@ type NavLink = {
 // página), excepto "CONTACT US" que sí es una ruta aparte — el form de
 // contacto que aún no está armado.
 const NAV_LINKS: NavLink[] = [
-    { label: "HOW IT WORKS", href: "#how-it-works" },
-    { label: "SOLUTIONS", href: "#solutions" },
-    { label: "ABOUT", href: "#about" },
-    { label: "FAQ", href: "#site-footer" },
+    { label: "How It Works", href: "/#how-it-works" },
+    { label: "Solutions", href: "/#solutions" },
+    { label: "About", href: "/#about" },
+    { label: "FAQ", href: "/#site-footer" },
 ];
 
 export default function Header() {

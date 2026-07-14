@@ -4,10 +4,10 @@ import Link from "next/link";
 // Mismas anclas que el nav del header — apuntan a secciones reales dentro
 // de la landing (HomeContainer), no a páginas separadas que ya no existen.
 const NAVIGATE_LINKS = [
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Solutions", href: "#solutions" },
-    { label: "About", href: "#about" },
-    { label: "FAQ", href: "#site-footer" },
+    { label: "How It Works", href: "/#how-it-works" },
+    { label: "Solutions", href: "/#solutions" },
+    { label: "About", href: "/#about" },
+    { label: "FAQ", href: "/#site-footer" },
 ];
 
 // "Contact" es la única ruta real (no ancla) — el form que todavía no
