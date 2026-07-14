@@ -93,7 +93,7 @@ export default function Map() {
 
             <section
                 ref={sectionRef}
-                className="relative flex min-h-[820px] w-full items-end justify-center bg-[#011C2D]"
+                className="relative flex min-h-[560px] w-full items-end justify-center bg-[#011C2D] sm:min-h-[680px] lg:min-h-[820px]"
             >
                 {/* Background video — plays once when in view, freezes on last frame */}
                 <video
@@ -115,7 +115,7 @@ export default function Map() {
                 {/* Content, con parallax hacia arriba */}
                 <div
                     ref={contentRef}
-                    className="relative z-10 flex h-full w-full max-w-5xl flex-col items-center px-6 pb-46 text-center will-change-transform"
+                    className="relative z-10 flex h-full w-full max-w-5xl flex-col items-center px-6 pb-16 text-center will-change-transform lg:pb-46"
                 >
                     {/* Blur degradado detrás del texto — mucho más amplio ahora,
                         cubre prácticamente todo el bloque de contenido */}
@@ -171,7 +171,7 @@ export default function Map() {
             </section>
 
 
-            <div className="relative z-10 h-0 w-full">
+            <div className="relative z-10 hidden h-0 w-full lg:block">
                 <div className="absolute inset-x-0 top-0 aspect-[2/1] w-full -translate-y-1/2">
                     <Image
                         src={`/assets/features/home/hero/hero-clouds-bridge_25.png`}

@@ -11,8 +11,9 @@ export default function RoofingPartner() {
     return (
         <section className="relative w-full bg-[#011C2D] py-20 lg:py-28">
             <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-2 lg:gap-16 lg:px-10">
-                {/* Left — copy */}
-                <div>
+                {/* Left — copy. Centrado en mobile/tablet, alineado a la
+                    izquierda desde lg: (comportamiento original en desktop). */}
+                <div className="text-center lg:text-left">
                     <p className="text-md font-medium tracking-[0.15em] text-[#F2733A]">
                         A TRUSTED ROOFING PARTNER
                     </p>
@@ -21,7 +22,7 @@ export default function RoofingPartner() {
                         <br />
                         Protect Your Home
                     </h2>
-                    <p className="mt-5 max-w-md text-base leading-relaxed text-white">
+                    <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-white lg:mx-0">
                         At Impact Roofing, we make roofing simple, honest, and reliable.
                         From your free inspection to the final installation, our
                         experienced professionals guide you through every step with
@@ -29,9 +30,9 @@ export default function RoofingPartner() {
                         to last.
                     </p>
 
-                    <div className="mt-8 max-w-md border-t border-white/70" />
+                    <div className="mx-auto mt-8 max-w-md border-t border-white/70 lg:mx-0" />
 
-                    <div className="mt-8 flex flex-col gap-4">
+                    <div className="mt-8 flex flex-col items-center gap-4 lg:items-start">
                         {CHECKLIST_ITEMS.map((item) => (
                             <div key={item} className="flex items-center gap-3">
                                 <CheckCircleIcon />
@@ -44,7 +45,7 @@ export default function RoofingPartner() {
                 </div>
 
                 {/* Right — image */}
-                <div className="relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl lg:justify-self-end">
+                <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl lg:mx-0 lg:justify-self-end">
                     <Image
                         src="/assets/features/home/partner/partner.png"
                         alt="Roofer working on a residential roof under a clear blue sky"
