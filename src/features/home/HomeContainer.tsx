@@ -6,9 +6,6 @@ import HowItWorks from "@/features/home/HowItWorks";
 import Marketplace from "@/features/home/Marketplace";
 import RoofingPartner from "@/features/home/RoofingPartner";
 import FAQ from "@/features/home/FAQ";
-// import VideoBanner from "./VideoBanner";
-// import StormAlert from "./StormAlert";
-// ...el resto de secciones cuando existan
 
 export default function HomeContainer() {
     return (
@@ -20,8 +17,7 @@ export default function HomeContainer() {
             <Marketplace/>
             <RoofingPartner/>
             <FAQ/>
-            {/* <VideoBanner /> */}
-            {/* <StormAlert /> */}
+            {/* <PROXIMO FORM PARA CONTACT /> */}
         </main>
     );
 }

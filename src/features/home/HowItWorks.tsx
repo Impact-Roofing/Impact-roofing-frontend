@@ -34,7 +34,7 @@ const STEPS = [
 
 export default function HowItWorks() {
     return (
-        <section
+        <section id="how-it-works"
             className={`relative w-full overflow-hidden bg-[#011C2D] py-20 lg:py-28 ${montserrat.className}`}
         >
             {/* Soft radial glow behind the content */}

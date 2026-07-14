@@ -1,18 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const SOLUTIONS_LINKS = [
-    { label: "For Homeowners", href: "/services/homeowners" },
-    { label: "For Insurance Claims", href: "/services/insurance-claims" },
-    { label: "For Insurance Agents", href: "/services/insurance-agents" },
-    { label: "For Real Estate", href: "/services/real-estate" },
-    { label: "For Contractors", href: "/services/contractors" },
+// Mismas anclas que el nav del header — apuntan a secciones reales dentro
+// de la landing (HomeContainer), no a páginas separadas que ya no existen.
+const NAVIGATE_LINKS = [
+    { label: "How It Works", href: "#how-it-works" },
+    { label: "Solutions", href: "#solutions" },
+    { label: "About", href: "#about" },
+    { label: "FAQ", href: "#site-footer" },
 ];
 
-const COMPANY_LINKS = [
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
-];
+// "Contact" es la única ruta real (no ancla) — el form que todavía no
+// está armado, igual que el CTA del header.
+const COMPANY_LINKS = [{ label: "Contact", href: "/contact" }];
 
 export default function Footer() {
     const year = new Date().getFullYear();
@@ -59,10 +59,10 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    {/* Solutions — mismos sub-links que el dropdown del header */}
-                    <FooterColumn title="Solutions" links={SOLUTIONS_LINKS} />
+                    {/* Navigate — mismas anclas que el header */}
+                    <FooterColumn title="Navigate" links={NAVIGATE_LINKS} />
 
-                    {/* Company — About / Contact, igual que el nav principal */}
+                    {/* Company — Contact, la única ruta real (form aún no armado) */}
                     <FooterColumn title="Company" links={COMPANY_LINKS} />
 
                     {/* Get In Touch */}

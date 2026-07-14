@@ -9,7 +9,7 @@ const CHECKLIST_ITEMS = [
 
 export default function RoofingPartner() {
     return (
-        <section className="relative w-full bg-[#011C2D] py-20 lg:py-28">
+        <section id="about" className="relative w-full bg-[#011C2D] py-20 lg:py-28">
             <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-2 lg:gap-16 lg:px-10">
                 {/* Left — copy. Centrado en mobile/tablet, alineado a la
                     izquierda desde lg: (comportamiento original en desktop). */}

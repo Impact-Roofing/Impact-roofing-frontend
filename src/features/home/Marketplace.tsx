@@ -18,7 +18,7 @@ const ADVANCED_ITEMS = [
 
 export default function Marketplace() {
     return (
-        <section className="relative w-full bg-[#011C2D] py-20 lg:py-28">
+        <section id="solutions" className="relative w-full bg-[#011C2D] py-20 lg:py-28">
             <div className="mx-auto max-w-6xl px-6 lg:px-10">
                 <p className="text-md font-semibold tracking-[0.15em] text-[#F2733A]">
                     A MODERN MARKETPLACE
