@@ -20,15 +20,15 @@ export default function Footer() {
     return (
         <footer id="site-footer" className="relative z-50 w-full bg-white py-16 lg:py-20">
             <div className="mx-auto max-w-6xl px-6 lg:px-10">
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.1fr] lg:gap-8">
+                <div className="grid grid-cols-1 gap-12 text-center lg:grid-cols-[1.3fr_1fr_1fr_1.1fr] lg:gap-8 lg:text-left">
                     {/* Logo + tagline + social */}
-                    <div>
+                    <div className="flex flex-col items-center lg:items-start">
                         <div className="relative h-14 w-40">
                             <Image
                                 src="/assets/shared/logo/logo-dark.png"
                                 alt="Impact Roofing"
                                 fill
-                                className="object-contain object-left"
+                                className="object-contain object-center lg:object-left"
                             />
                         </div>
 
@@ -37,7 +37,7 @@ export default function Footer() {
                             pricing, and craftsmanship built to last.
                         </p>
 
-                        <div className="mt-6 flex items-center gap-4">
+                        <div className="mt-6 flex items-center justify-center gap-4 lg:justify-start">
                             <a
                                 href="https://linkedin.com"
                                 target="_blank"
@@ -90,7 +90,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="mt-16 flex flex-col gap-2 border-t border-[#0B2545]/10 pt-6 text-xs text-[#0B2545]/50 sm:flex-row sm:items-center sm:justify-between">
+                <div className="mt-16 flex flex-col items-center gap-2 border-t border-[#0B2545]/10 pt-6 text-center text-xs text-[#0B2545]/50 sm:flex-row sm:items-center sm:justify-between sm:text-left">
                     <p>© {year} Impact Roofing. All rights reserved.</p>
                     <div className="flex gap-4">
                         <Link href="/privacy-policy" className="hover:text-[#001321]">

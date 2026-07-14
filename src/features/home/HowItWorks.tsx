@@ -37,8 +37,8 @@ export default function HowItWorks() {
         <section
             className={`relative w-full overflow-hidden bg-[#011C2D] py-20 lg:py-28 ${montserrat.className}`}
         >
-            {/* Soft radial glow behind the content, matching the reference */}
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_70%_at_50%_50%,rgba(94,158,201,0.15),transparent_70%)]" />
+            {/* Soft radial glow behind the content */}
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(94,158,201,0.2),transparent_70%)] md:bg-[radial-gradient(ellipse_55%_60%_at_50%_50%,rgba(94,158,201,0.15),transparent_70%)]" />
 
             <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-10">
                 <p className="text-sm font-bold tracking-[0.15em] text-[#F2733A]">

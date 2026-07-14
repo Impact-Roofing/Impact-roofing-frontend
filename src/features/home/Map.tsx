@@ -89,7 +89,7 @@ export default function Map() {
     return (
         <div className="relative w-full">
             {/* Solid container above the video — the section's top gradient fades into this */}
-            <div className="h-24 w-full bg-[#011C2D] lg:h-62" />
+            <div className="h-24 w-full  bg-[#011C2D] lg:h-62" />
 
             <section
                 ref={sectionRef}
@@ -183,7 +183,7 @@ export default function Map() {
             </div>
 
             {/* Solid container below the video — the section's bottom gradient fades into this */}
-            <div className="h-24 w-full bg-[#011C2D] lg:h-32" />
+            <div className="h-5 w-full bg-[#011C2D] lg:h-32 md:h-24" />
         </div>
     );
 }
