@@ -64,7 +64,7 @@ function teamEmailHtml(body: any): string {
         </div>
 
         <div style="background: #f9fafb; padding: 16px 32px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; font-size: 12px; color: #9ca3af; text-align: center;">
-            Lead from Instant Estimate Widget · Advanced Roofing Team · Chicago, IL
+            Lead from Instant Estimate Widget · Impact roofing · IL
         </div>
     </div>
     `;
@@ -84,7 +84,7 @@ function clientEmailHtml(body: any): string {
     <div style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px;">
         <div style="background: #1e3a5f; padding: 24px 32px; border-radius: 8px 8px 0 0;">
             <h2 style="color: #fff; margin: 0; font-size: 20px;">Your Roof Estimate is Ready</h2>
-            <p style="color: #93c5fd; margin: 4px 0 0; font-size: 13px;">Advanced Roofing Team · Chicago, IL</p>
+            <p style="color: #93c5fd; margin: 4px 0 0; font-size: 13px;">Impact Roofing · IL</p>
         </div>
 
         <div style="background: #fff; padding: 32px; border: 1px solid #e5e7eb; border-top: none;">
@@ -119,7 +119,7 @@ function clientEmailHtml(body: any): string {
         </div>
 
         <div style="background: #f9fafb; padding: 16px 32px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; font-size: 12px; color: #9ca3af; text-align: center;">
-            Advanced Roofing Team · Chicago, IL · advancedteamelite.com
+            Impact Roofing · IL · impactroofing.com
         </div>
     </div>
     `;
@@ -133,7 +133,7 @@ export async function POST(req: Request) {
 
         // 1. Email al equipo — siempre
         await resend.emails.send({
-            from: "Advanced Leads <info@contact.advancedteamelite.com>",
+            from: "Impact Leads <info@contact.advancedteamelite.com>",
             to: TEAM_EMAIL,
             subject: `New Roof Lead: ${firstName} ${lastName} — $${quote.total?.toLocaleString()}`,
             html: teamEmailHtml(body),
@@ -142,9 +142,9 @@ export async function POST(req: Request) {
         // 2. Email al cliente — solo si marcó el checkbox
         if (sendPdf && email) {
             await resend.emails.send({
-                from: "Advanced Roofing Team <info@contact.advancedteamelite.com>",
+                from: "Impact Roofing <info@contact.advancedteamelite.com>",
                 to: email,
-                subject: "Your Roof Estimate — Advanced Roofing Team",
+                subject: "Your Roof Estimate — Impact Roofing",
                 html: clientEmailHtml(body),
             });
         }
