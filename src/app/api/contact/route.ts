@@ -10,7 +10,7 @@ export async function POST(req: Request) {
         const { firstName, email, phone, address, message } = body;
 
         await resend.emails.send({
-            from: 'Advanced Leads <info@contact.advancedteamelite.com>',
+            from: 'Impact Roofing Lead <info@contact.advancedteamelite.com>',
             to: process.env.NOTIFICATION_EMAIL || 'dtalledo@advancedteamelite.com',
             subject: `New Inspection Request: ${firstName}`,
             html: `
