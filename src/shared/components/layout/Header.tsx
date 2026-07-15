@@ -81,27 +81,40 @@ export default function Header() {
                 </button>
             </div>
 
-            {/* Mobile menu */}
+            {/* Mobile menu — mismo look "glass" que el resto del sitio
+                (rgba + blur + borde sutil), en vez del panel casi opaco que
+                tenía antes y el botón con gradiente blanco sólido. */}
             {isMenuOpen && (
-                <div className="mx-4 mt-2 rounded-2xl bg-[#0B2545]/95 p-6 backdrop-blur lg:hidden">
-                    <nav className="flex flex-col gap-5">
+                <div
+                    className="mx-4 mt-2 rounded-2xl border border-white/10 p-6 shadow-lg shadow-black/10 lg:hidden"
+                    style={{
+                        background: "rgba(255,255,255,0.1)",
+                        backdropFilter: "blur(20px)",
+                        WebkitBackdropFilter: "blur(20px)",
+                    }}
+                >
+                    <nav className="flex flex-col gap-1">
                         {NAV_LINKS.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-sm font-medium tracking-wide text-white"
+                                className="rounded-[10px] px-3 py-2.5 text-sm font-medium tracking-wide text-white transition-colors hover:bg-white/10"
                             >
                                 {link.label}
                             </Link>
                         ))}
                         <Link
-                            href={{ pathname: "/", hash: "contact" }}
+                            href="#contact"
                             onClick={() => setIsMenuOpen(false)}
-                            className="mt-2 flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-white to-[#BEE6F5] px-5 py-2.5 text-sm font-semibold text-[#0B2545]"
+                            className="mt-3 flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold tracking-wide text-white"
+                            style={{
+                                background: "rgba(255,255,255,0.1)",
+                                border: "1px solid rgba(255,255,255,0.1)",
+                            }}
                         >
                             CONTACT US
-                            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#0B2545] text-white">
+                            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545]">
                                 <ArrowIcon />
                             </span>
                         </Link>
