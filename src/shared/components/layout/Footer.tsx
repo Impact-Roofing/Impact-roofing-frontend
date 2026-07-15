@@ -10,7 +10,7 @@ const NAVIGATE_LINKS = [
     { label: "FAQ", href: "/#site-footer" },
 ];
 
-// "Contact" es la única ruta real (no ancla) — el form que todavía no
+// "Contact" es la única ruta real (no ancla) — el contact que todavía no
 // está armado, igual que el CTA del header.
 const COMPANY_LINKS = [{ label: "Contact", href: "/contact" }];
 
@@ -62,7 +62,7 @@ export default function Footer() {
                     {/* Navigate — mismas anclas que el header */}
                     <FooterColumn title="Navigate" links={NAVIGATE_LINKS} />
 
-                    {/* Company — Contact, la única ruta real (form aún no armado) */}
+                    {/* Company — Contact, la única ruta real (contact aún no armado) */}
                     <FooterColumn title="Company" links={COMPANY_LINKS} />
 
                     {/* Get In Touch */}

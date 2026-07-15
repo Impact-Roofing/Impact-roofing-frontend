@@ -26,24 +26,28 @@ const FAQ_ITEMS = [
 ];
 
 export default function FAQ() {
-    const [openIndex, setOpenIndex] = useState<number | null>(null);
+    // Primer item abierto por defecto, igual que el mockup.
+    const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <section  id="site-footer" className="relative z-50 w-full bg-white py-20 lg:py-28">
-            <div id="faq" className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 lg:grid-cols-[320px_1fr] lg:gap-20 lg:px-10">
-                {/* Left — heading */}
-                <div>
-                    <h2 className="font-jost text-3xl font-extrabold leading-tight text-[#0B2545] lg:text-4xl">
-                        You Ask, We Answer
-                    </h2>
-                    <p className="mt-3 text-sm leading-relaxed text-[#0B2545]/60">
-                        Learn how Impact Roofing brings transparency, simplicity, and
-                        confidence to every roofing project.
-                    </p>
-                </div>
+        <section
+            id="faq"
+            className="w-full bg-white pb-20 pt-28 lg:pb-28 lg:pt-36"
+        >
+            <div className="mx-auto max-w-6xl px-6 lg:px-10">
+                {/* Título + subtítulo — ancho completo, ya no en columna aparte */}
+                <h2 className="font-jost text-4xl font-extrabold leading-tight text-[#0B2545] lg:text-5xl">
+                    Have Questions?
+                    <br />
+                    We&apos;ve Got Answers
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-[#0B2545]/60">
+                    Everything you need to know about our roofing services,
+                    inspections, and process.
+                </p>
 
-                {/* Right — accordion */}
-                <div className="border-t border-[#0B2545]/10">
+                {/* Acordeón — debajo del título, mismo ancho */}
+                <div className="mt-10 border-t border-[#0B2545]/10">
                     {FAQ_ITEMS.map((item, index) => {
                         const isOpen = openIndex === index;
                         return (
@@ -54,12 +58,18 @@ export default function FAQ() {
                                     aria-expanded={isOpen}
                                     className="flex w-full cursor-pointer items-center justify-between gap-6 py-5 text-left"
                                 >
-                  <span className="text-base font-semibold text-[#0B2545] lg:text-lg">
-                    {item.question}
-                  </span>
+                                    <span
+                                        className={`text-base font-semibold transition-colors lg:text-lg ${
+                                            isOpen ? "text-[#F2733A]" : "text-[#0B2545]"
+                                        }`}
+                                    >
+                                        {item.question}
+                                    </span>
                                     <ChevronIcon
-                                        className={`shrink-0 text-[#2F739E] transition-transform duration-200 ${
-                                            isOpen ? "rotate-180" : ""
+                                        className={`shrink-0 transition-transform duration-200 ${
+                                            isOpen
+                                                ? "rotate-180 text-[#F2733A]"
+                                                : "text-[#0B2545]"
                                         }`}
                                     />
                                 </button>

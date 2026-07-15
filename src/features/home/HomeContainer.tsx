@@ -6,6 +6,7 @@ import HowItWorks from "@/features/home/HowItWorks";
 import Marketplace from "@/features/home/Marketplace";
 import RoofingPartner from "@/features/home/RoofingPartner";
 import FAQ from "@/features/home/FAQ";
+import ContactUs from "@/features/home/ContactUs";
 
 export default function HomeContainer() {
     return (
@@ -17,7 +18,8 @@ export default function HomeContainer() {
             <Marketplace/>
             <RoofingPartner/>
             <FAQ/>
-            {/* <PROXIMO FORM PARA CONTACT /> */}
+            <ContactUs/>
+
         </main>
     );
 }

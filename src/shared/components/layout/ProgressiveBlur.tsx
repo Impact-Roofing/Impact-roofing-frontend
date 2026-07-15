@@ -1,31 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type ProgressiveBlurProps = {
-    /** Qué borde de la pantalla cubre. */
     edge: "top" | "bottom";
-    /** Alto del área de desenfoque, en px. */
     height?: number;
-    /** z-index del overlay — súbelo si algo lo tapa. */
     zIndex?: number;
-    /** Tinte de color opcional sobre el blur (ej. "rgba(1,28,45,0.15)"). */
     tint?: string;
-    /** id de un elemento que, al entrar en pantalla, hace desaparecer este blur (opcional). */
-    hideWhenVisibleId?: string;
+    /** Oculta el blur cuando falta menos de esta distancia (px) para llegar
+     *  al final absoluto de la página. Solo aplica a edge="bottom". */
+    hideNearPageEnd?: number;
 };
 
-// Capas de blur creciente, cada una recortada (mask-image) en una franja
-// distinta. Al superponerlas, el desenfoque se siente gradual en vez de un
-// corte brusco entre "nítido" y "borroso".
-// Reduje los valores de blur para que la transición sea más tenue
 const LAYERS = [
     { blur: 0.2, from: 0, to: 20 },
     { blur: 0.5, from: 15, to: 35 },
     { blur: 1, from: 30, to: 50 },
     { blur: 2, from: 45, to: 65 },
     { blur: 4, from: 60, to: 80 },
-    { blur: 8, from: 75, to: 100 }, // El punto máximo ahora es 8px en lugar de 16px
+    { blur: 8, from: 75, to: 100 },
 ];
 
 export default function ProgressiveBlur({
@@ -33,32 +26,73 @@ export default function ProgressiveBlur({
                                             height = 180,
                                             zIndex = 40,
                                             tint = "rgba(0,0,0,0)",
-                                            hideWhenVisibleId,
+                                            hideNearPageEnd,
                                         }: ProgressiveBlurProps) {
     const [hidden, setHidden] = useState(false);
+    const [unmounted, setUnmounted] = useState(false);
+    const fadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    // En vez de buscar un elemento por id (que puede fallar en silencio si
+    // el id no coincide, o si el lookup corre antes de que exista en el
+    // DOM), calculamos directamente qué tan cerca estamos del final
+    // ABSOLUTO del documento — no depende de ningún elemento puntual, así
+    // que no puede "no encontrar nada" y quedarse pegado en false para
+    // siempre (que es lo que probablemente estaba pasando).
+    useEffect(() => {
+        if (!hideNearPageEnd) return;
+
+        let ticking = false;
+
+        const update = () => {
+            const scrollY = window.scrollY;
+            const viewportH = window.innerHeight;
+            const docH = document.documentElement.scrollHeight;
+            const distanceFromBottom = docH - scrollY - viewportH;
+            setHidden(distanceFromBottom <= hideNearPageEnd);
+            ticking = false;
+        };
+
+        const onScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(update);
+                ticking = true;
+            }
+        };
+
+        update();
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("resize", onScroll);
+        };
+    }, [hideNearPageEnd]);
 
     useEffect(() => {
-        if (!hideWhenVisibleId) return;
-        const target = document.getElementById(hideWhenVisibleId);
-        if (!target) return;
+        if (fadeTimeoutRef.current) {
+            clearTimeout(fadeTimeoutRef.current);
+            fadeTimeoutRef.current = null;
+        }
 
-        const observer = new IntersectionObserver(
-            ([entry]) => setHidden(entry.isIntersecting),
-            { rootMargin: `0px 0px -${height}px 0px`, threshold: 0 }
-        );
+        if (hidden) {
+            fadeTimeoutRef.current = setTimeout(() => setUnmounted(true), 220);
+        } else {
+            setUnmounted(false);
+        }
 
-        observer.observe(target);
-        return () => observer.disconnect();
-    }, [hideWhenVisibleId, height]);
+        return () => {
+            if (fadeTimeoutRef.current) clearTimeout(fadeTimeoutRef.current);
+        };
+    }, [hidden]);
 
-    // Para "bottom": el blur se intensifica hacia abajo (mask "to bottom").
-    // Para "top": se intensifica hacia arriba (mask "to top") — es el espejo.
+    if (unmounted) return null;
+
     const maskDirection = edge === "bottom" ? "to bottom" : "to top";
 
     return (
         <div
             aria-hidden
-            className={`pointer-events-none fixed inset-x-0 ${edge}-0 overflow-hidden transition-opacity duration-300`}
+            className={`pointer-events-none fixed inset-x-0 ${edge}-0 overflow-hidden transition-opacity duration-200`}
             style={{ height, zIndex, opacity: hidden ? 0 : 1 }}
         >
             {LAYERS.map((layer, i) => {

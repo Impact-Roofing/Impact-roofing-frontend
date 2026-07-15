@@ -11,7 +11,7 @@ type NavLink = {
 
 // Ahora es una landing de una sola página: cada link apunta a un "id" de
 // una sección real dentro de HomeContainer (scroll dentro de la misma
-// página), excepto "CONTACT US" que sí es una ruta aparte — el form de
+// página), excepto "CONTACT US" que sí es una ruta aparte — el contact de
 // contacto que aún no está armado.
 const NAV_LINKS: NavLink[] = [
     { label: "How It Works", href: "/#how-it-works" },
@@ -50,7 +50,7 @@ export default function Header() {
                     ))}
                 </nav>
 
-                {/* CTA — lleva al form de contacto (todavía no armado) */}
+                {/* CTA — lleva al contact de contacto (todavía no armado) */}
                 <Link
                     href="/contact"
                     className="group hidden items-center gap-4 rounded-full pl-8 pr-2 py-2 text-sm font-bold tracking-wide text-white transition-all hover:scale-[1.03] lg:flex"

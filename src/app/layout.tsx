@@ -30,7 +30,10 @@ export default function RootLayout({
         {children}
         <Footer />
         <ProgressiveBlur edge="top" />
-        <ProgressiveBlur edge="bottom" hideWhenVisibleId="site-footer" />
+        {/* Se oculta cuando faltan menos de 900px para el final absoluto de
+            la página (el footer siempre es lo último) — ya no depende de
+            encontrar ningún id puntual. */}
+        <ProgressiveBlur edge="bottom" hideNearPageEnd={500} />
         </body>
         </html>
     );
