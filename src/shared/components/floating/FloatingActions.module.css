@@ -281,11 +281,12 @@
 
 .hintTitle {
     color: black;
-    font-size: 23px;
+    font-size: 18px;
     font-weight: 800;
     margin: auto;
     line-height: 1.2;
     text-align: center;
+    padding-left: 10px;
 
     /* 🔥 La sacudida ocurre cada 5 segundos */
     animation: textAttention 5s ease-in-out infinite;
@@ -346,8 +347,8 @@
     left: -56px;
     top: 50%;
     transform: translateY(-50%);
-    background-color: #ff721f;
-    color: black;
+    background-color: #F3752B;
+    color: white;
     border: none;
     padding: 35px 10px;
     border-radius: 12px 0 0 12px;
