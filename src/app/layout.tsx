@@ -3,6 +3,8 @@ import Header from "@/shared/components/layout/Header";
 import Footer from "@/shared/components/layout/Footer";
 import ProgressiveBlur from "@/shared/components/layout/ProgressiveBlur";
 import "./globals.css";
+import {FloatingActions} from "@/shared/components/floating/FloatingActions";
+import {GoogleMapsProvider} from "@/features/widget/GoogleMapsProvider";
 
 const jost = Jost({
     subsets: ["latin"],
@@ -26,14 +28,18 @@ export default function RootLayout({
     return (
         <html lang="en" className={`${jost.variable} ${montserrat.variable} scroll-smooth`}>
         <body className="font-sans">
-        <Header />
-        {children}
-        <Footer />
-        <ProgressiveBlur edge="top" />
-        {/* Se oculta cuando faltan menos de 900px para el final absoluto de
+        <GoogleMapsProvider>
+            <Header />
+            {children}
+            <FloatingActions />
+            <Footer />
+            <ProgressiveBlur edge="top" />
+            {/* Se oculta cuando faltan menos de 900px para el final absoluto de
             la página (el footer siempre es lo último) — ya no depende de
             encontrar ningún id puntual. */}
-        <ProgressiveBlur edge="bottom" hideNearPageEnd={500} />
+            <ProgressiveBlur edge="bottom" hideNearPageEnd={500} />
+        </GoogleMapsProvider>
+
         </body>
         </html>
     );

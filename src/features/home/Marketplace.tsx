@@ -94,7 +94,7 @@ export default function Marketplace() {
 
                 <div className="flex justify-center mt-10">
                     <Link
-                        href="/quote"
+                        href={{ pathname: "/", hash: "contact" }}
                         className="inline-flex items-center gap-3 rounded-full bg-[#0B2545] px-8 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-[1.03]"
                     >
                         LET&apos;S GET STARTED

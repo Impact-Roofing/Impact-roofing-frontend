@@ -41,19 +41,19 @@ export default function Hero() {
                     </p>
 
                     <Link
-                        href="/contact"
-                        className="group mt-8 inline-flex items-center gap-6 rounded-full pl-8 pr-2 py-3 text-lg font-bold tracking-wide text-white transition-all hover:scale-[1.03]"
+                        href={{ pathname: "/", hash: "contact" }}
+                        className="group relative z-[999] mt-8 inline-flex items-center gap-6 rounded-full py-3 pl-8 pr-2 text-lg font-bold tracking-wide text-white transition-all hover:scale-[1.03]"
                         style={{
                             background: "rgba(255, 255, 255, 0.15)",
                             backdropFilter: "blur(12px)",
                             WebkitBackdropFilter: "blur(12px)",
-                            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.08)"
+                            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.08)",
                         }}
                     >
                         LET&apos;S GET STARTED
                         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545] transition-transform group-hover:translate-x-1">
-                            <ArrowIcon />
-                        </span>
+        <ArrowIcon />
+    </span>
                     </Link>
                 </div>
             </div>

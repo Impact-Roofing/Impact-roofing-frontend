@@ -54,7 +54,7 @@ export default function RoofingPartner() {
                     />
 
                     <Link
-                        href="/quote"
+                        href={{ pathname: "/", hash: "contact" }}
                         className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-[#0B2545]/80 px-5 py-2.5 text-sm font-semibold tracking-wide text-white backdrop-blur-sm transition-transform hover:scale-[1.03]"
                     >
                         LET&apos;S GET STARTED

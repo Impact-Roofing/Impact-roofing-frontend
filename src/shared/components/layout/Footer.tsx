@@ -12,7 +12,7 @@ const NAVIGATE_LINKS = [
 
 // "Contact" es la única ruta real (no ancla) — el contact que todavía no
 // está armado, igual que el CTA del header.
-const COMPANY_LINKS = [{ label: "Contact", href: "/contact" }];
+const COMPANY_LINKS = [{ label: "Contact", href: "/#contact" }];
 
 export default function Footer() {
     const year = new Date().getFullYear();

@@ -52,7 +52,7 @@ export default function Header() {
 
                 {/* CTA — lleva al contact de contacto (todavía no armado) */}
                 <Link
-                    href="/contact"
+                    href={{ pathname: "/", hash: "contact" }}
                     className="group hidden items-center gap-4 rounded-full pl-8 pr-2 py-2 text-sm font-bold tracking-wide text-white transition-all hover:scale-[1.03] lg:flex"
                     style={{
                         background: "rgba(255, 255, 255, 0.15)",
@@ -96,7 +96,7 @@ export default function Header() {
                             </Link>
                         ))}
                         <Link
-                            href="/contact"
+                            href={{ pathname: "/", hash: "contact" }}
                             onClick={() => setIsMenuOpen(false)}
                             className="mt-2 flex items-center justify-center gap-2 rounded-full bg-gradient-to-b from-white to-[#BEE6F5] px-5 py-2.5 text-sm font-semibold text-[#0B2545]"
                         >
