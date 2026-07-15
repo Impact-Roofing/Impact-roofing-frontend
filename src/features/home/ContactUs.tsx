@@ -250,7 +250,7 @@ export default function ContactUs() {
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-[#F2733A] py-4 text-sm font-bold tracking-wide text-white transition-transform hover:scale-[1.01] disabled:opacity-70"
+                                    className="mt-2 cursor-pointer flex w-full items-center justify-center gap-2 rounded-full bg-[#F2733A] py-4 text-sm font-bold tracking-wide text-white transition-transform hover:scale-[1.01] disabled:opacity-70"
                                 >
                                     {isLoading ? (
                                         <svg
