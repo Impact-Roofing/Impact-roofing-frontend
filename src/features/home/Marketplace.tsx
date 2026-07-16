@@ -1,4 +1,4 @@
-import Link from "next/link";
+"use client";
 
 const TRADITIONAL_ITEMS = [
     "Endless Follow-Ups",
@@ -93,15 +93,26 @@ export default function Marketplace() {
                 </div>
 
                 <div className="flex justify-center mt-10">
-                    <Link
-                        href={{ pathname: "/", hash: "contact" }}
+                    {/* <a> nativa + scroll manual — mismo fix que en Hero.tsx
+                        y RoofingPartner.tsx: si la URL ya está en "#contact",
+                        el hash no cambia al hacer clic de nuevo y el
+                        navegador no vuelve a disparar el scroll. */}
+                    <a
+                        href="#contact"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document
+                                .getElementById("contact")
+                                ?.scrollIntoView({ behavior: "smooth" });
+                            history.pushState(null, "", "#contact");
+                        }}
                         className="inline-flex items-center gap-3 rounded-full bg-[#0B2545] px-8 py-3 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-[1.03]"
                     >
                         LET&apos;S GET STARTED
                         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545]">
                             <ArrowIcon />
                         </span>
-                    </Link>
+                    </a>
                 </div>
 
             </div>

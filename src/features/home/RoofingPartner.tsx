@@ -1,5 +1,6 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
 
 const CHECKLIST_ITEMS = [
     "Free Quote",
@@ -53,15 +54,29 @@ export default function RoofingPartner() {
                         className="object-cover"
                     />
 
-                    <Link
-                        href={{ pathname: "/", hash: "contact" }}
-                        className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-[#0B2545]/80 px-5 py-2.5 text-sm font-semibold tracking-wide text-white backdrop-blur-sm transition-transform hover:scale-[1.03]"
+                    {/* <a> nativa + scroll manual: mismo fix que en Hero.tsx —
+                        si la URL ya tiene "#contact", el navegador no vuelve a
+                        disparar el scroll al hacer clic de nuevo (el hash no
+                        cambia). También quité "backdrop-blur-sm" por
+                        consistencia con el resto del sitio (ya no usamos
+                        backdrop-filter en ningún lado, por los bugs de
+                        compositing que resolvimos antes). */}
+                    <a
+                        href="#contact"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document
+                                .getElementById("contact")
+                                ?.scrollIntoView({ behavior: "smooth" });
+                            history.pushState(null, "", "#contact");
+                        }}
+                        className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-[#0B2545]/90 px-5 py-2.5 text-sm font-semibold tracking-wide text-white transition-transform hover:scale-[1.03]"
                     >
                         LET&apos;S GET STARTED
                         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#5BC2E7] text-[#0B2545]">
               <ArrowIcon />
             </span>
-                    </Link>
+                    </a>
                 </div>
             </div>
         </section>

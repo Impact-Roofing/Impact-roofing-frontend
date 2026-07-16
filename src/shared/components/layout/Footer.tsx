@@ -1,18 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// Mismas anclas que el nav del header — apuntan a secciones reales dentro
-// de la landing (HomeContainer), no a páginas separadas que ya no existen.
+// Mismas anclas que el nav del header — <a> nativa, no next/link, por el
+// mismo motivo (evitar que los hashes se apilen en la URL en vez de
+// reemplazarse).
 const NAVIGATE_LINKS = [
-    { label: "How It Works", href: "/#how-it-works" },
-    { label: "Solutions", href: "/#solutions" },
-    { label: "About", href: "/#about" },
-    { label: "FAQ", href: "/#site-footer" },
+    { label: "How It Works", href: "#how-it-works" },
+    { label: "Solutions", href: "#solutions" },
+    { label: "About", href: "#about" },
+    { label: "FAQ", href: "#faq" },
 ];
 
-// "Contact" es la única ruta real (no ancla) — el contact que todavía no
-// está armado, igual que el CTA del header.
-const COMPANY_LINKS = [{ label: "Contact", href: "/#contact" }];
+const COMPANY_LINKS = [{ label: "Contact", href: "#contact" }];
 
 export default function Footer() {
     const year = new Date().getFullYear();
@@ -62,7 +61,7 @@ export default function Footer() {
                     {/* Navigate — mismas anclas que el header */}
                     <FooterColumn title="Navigate" links={NAVIGATE_LINKS} />
 
-                    {/* Company — Contact, la única ruta real (contact aún no armado) */}
+                    {/* Company — Contact, ancla a #contact */}
                     <FooterColumn title="Company" links={COMPANY_LINKS} />
 
                     {/* Get In Touch */}
@@ -93,6 +92,7 @@ export default function Footer() {
                 <div className="mt-16 flex flex-col items-center gap-2 border-t border-[#0B2545]/10 pt-6 text-center text-xs text-[#0B2545]/50 sm:flex-row sm:items-center sm:justify-between sm:text-left">
                     <p>© {year} Impact Roofing. All rights reserved.</p>
                     <div className="flex gap-4">
+                        {/* Estas sí son páginas reales, se quedan con next/link */}
                         <Link href="/privacy-policy" className="hover:text-[#001321]">
                             Privacy Policy
                         </Link>
@@ -121,12 +121,12 @@ function FooterColumn({
             <ul className="mt-4 flex flex-col gap-3">
                 {links.map((link) => (
                     <li key={link.href}>
-                        <Link
+                        <a
                             href={link.href}
                             className="text-sm text-[#0B2545]/80 transition-colors hover:text-[#001321]"
                         >
                             {link.label}
-                        </Link>
+                        </a>
                     </li>
                 ))}
             </ul>

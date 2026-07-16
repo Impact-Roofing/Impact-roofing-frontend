@@ -10,14 +10,19 @@ type NavLink = {
 };
 
 // Ahora es una landing de una sola página: cada link apunta a un "id" de
-// una sección real dentro de HomeContainer (scroll dentro de la misma
-// página), excepto "CONTACT US" que sí es una ruta aparte — el contact de
-// contacto que aún no está armado.
+// una sección real dentro de HomeContainer. Como son saltos DENTRO de la
+// misma página, usamos <a> nativa (no next/link) — con next/link, cada
+// clic empujaba un hash nuevo al que ya estaba en la URL en vez de
+// reemplazarlo (ej. "#how-it-works#solutions"). <a href="#id"> siempre
+// reemplaza el hash actual, nunca lo apila.
+//
+// Nota: "FAQ" apuntaba a "/#site-footer" (el id del footer, no el de la
+// sección FAQ) — lo corregí a "#faq", que es el id real de esa sección.
 const NAV_LINKS: NavLink[] = [
-    { label: "How It Works", href: "/#how-it-works" },
-    { label: "Solutions", href: "/#solutions" },
-    { label: "About", href: "/#about" },
-    { label: "FAQ", href: "/#site-footer" },
+    { label: "How It Works", href: "#how-it-works" },
+    { label: "Solutions", href: "#solutions" },
+    { label: "About", href: "#about" },
+    { label: "FAQ", href: "#faq" },
 ];
 
 export default function Header() {
@@ -26,7 +31,7 @@ export default function Header() {
     return (
         <header className="absolute top-0 left-0 z-50 w-full">
             <div className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-6 lg:px-10">
-                {/* Logo */}
+                {/* Logo — navegación real a otra ruta, se queda con next/link */}
                 <Link href="/" className="relative h-20 w-44 shrink-0 lg:h-24 lg:w-52">
                     <Image
                         src="/assets/shared/logo/logo.png"
@@ -40,19 +45,19 @@ export default function Header() {
                 {/* Desktop nav */}
                 <nav className="hidden items-center gap-10 lg:flex">
                     {NAV_LINKS.map((link) => (
-                        <Link
+                        <a
                             key={link.href}
                             href={link.href}
                             className="text-sm font-semibold tracking-wide text-white transition-colors"
                         >
                             {link.label}
-                        </Link>
+                        </a>
                     ))}
                 </nav>
 
-                {/* CTA — lleva al contact de contacto (todavía no armado) */}
-                <Link
-                    href={{ pathname: "/", hash: "contact" }}
+                {/* CTA — ancla a #contact, <a> nativa */}
+                <a
+                    href="#contact"
                     className="group hidden items-center gap-4 rounded-full pl-8 pr-2 py-2 text-sm font-bold tracking-wide text-white transition-all hover:scale-[1.03] lg:flex"
                     style={{
                         background: "rgba(255, 255, 255, 0.15)",
@@ -65,7 +70,7 @@ export default function Header() {
                     <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545] transition-transform group-hover:rotate-[-10deg]">
                         <ArrowIcon />
                     </span>
-                </Link>
+                </a>
 
                 {/* Mobile toggle */}
                 <button
@@ -81,9 +86,7 @@ export default function Header() {
                 </button>
             </div>
 
-            {/* Mobile menu — mismo look "glass" que el resto del sitio
-                (rgba + blur + borde sutil), en vez del panel casi opaco que
-                tenía antes y el botón con gradiente blanco sólido. */}
+            {/* Mobile menu */}
             {isMenuOpen && (
                 <div
                     className="mx-4 mt-2 rounded-2xl border border-white/10 p-6 shadow-lg shadow-black/10 lg:hidden"
@@ -95,16 +98,16 @@ export default function Header() {
                 >
                     <nav className="flex flex-col gap-1">
                         {NAV_LINKS.map((link) => (
-                            <Link
+                            <a
                                 key={link.href}
                                 href={link.href}
                                 onClick={() => setIsMenuOpen(false)}
                                 className="rounded-[10px] px-3 py-2.5 text-sm font-medium tracking-wide text-white transition-colors hover:bg-white/10"
                             >
                                 {link.label}
-                            </Link>
+                            </a>
                         ))}
-                        <Link
+                        <a
                             href="#contact"
                             onClick={() => setIsMenuOpen(false)}
                             className="mt-3 flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold tracking-wide text-white"
@@ -117,7 +120,7 @@ export default function Header() {
                             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545]">
                                 <ArrowIcon />
                             </span>
-                        </Link>
+                        </a>
                     </nav>
                 </div>
             )}
