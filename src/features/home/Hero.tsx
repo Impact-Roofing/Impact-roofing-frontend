@@ -10,7 +10,7 @@ export default function Hero() {
             {/* Background image container */}
             <div className="absolute inset-0 h-[100vh] w-full sm:h-[105vh] lg:h-[120vh]">
                 <Image
-                    src="/assets/features/home/hero/hero_4.png"
+                    src="/assets/features/home/hero/hero.webp"
                     alt="Roofer installing a new roof"
                     fill
                     priority

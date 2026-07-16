@@ -12,7 +12,7 @@ export default function HomeContainer() {
     return (
         <main>
             <Hero />
-            <HeroToMapBridge imageName="hero-clouds-bridge_17.png" />
+            <HeroToMapBridge imageName="top-cloud.webp" />
             <Map/>
             <HowItWorks/>
             <Marketplace/>

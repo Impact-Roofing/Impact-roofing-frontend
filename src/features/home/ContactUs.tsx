@@ -145,7 +145,7 @@ export default function ContactUs() {
                     {/* Izquierda — foto */}
                     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:aspect-auto lg:h-full">
                         <Image
-                            src="/assets/features/home/contact/contact-roof.png"
+                            src="/assets/features/home/contact/contact-roof.webp"
                             alt="Roofer working on a residential roof under a clear blue sky"
                             fill
                             className="object-cover"

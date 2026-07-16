@@ -12,31 +12,35 @@ const CLOUD_IMAGES = [
 // CANVAS_HEIGHT_VH de alto — más que una pantalla completa — para que, al
 // desplazarse, haya un tramo del scroll donde cubre TODO el viewport sin
 // huecos arriba ni abajo. Escala ~1.7x más grande que la versión anterior.
+// "speed" es nuevo: da el parallax individual sutil de cada nube, además
+// del movimiento en bloque de todo el lienzo (canvas).
 const CLOUDS = [
     // Banda densa (la que efectivamente tapa la pantalla)
-    { image: 0, top: "0%", left: "-10%", width: 940, opacity: 1 },
-    { image: 1, top: "6%", left: "6%", width: 820, opacity: 0.95 },
-    { image: 2, top: "-2%", left: "22%", width: 1000, opacity: 1 },
-    { image: 0, top: "8%", left: "40%", width: 860, opacity: 0.95 },
-    { image: 1, top: "-4%", left: "58%", width: 940, opacity: 1 },
-    { image: 2, top: "7%", left: "74%", width: 820, opacity: 0.95 },
-    { image: 0, top: "0%", left: "90%", width: 900, opacity: 1 },
+    { image: 0, top: "0%", left: "-10%", width: 940, opacity: 1, speed: 0.03 },
+    { image: 1, top: "6%", left: "6%", width: 820, opacity: 0.95, speed: 0.06 },
+    { image: 2, top: "-2%", left: "22%", width: 1000, opacity: 1, speed: 0.02 },
+    { image: 0, top: "8%", left: "40%", width: 860, opacity: 0.95, speed: 0.05 },
+    { image: 1, top: "-4%", left: "58%", width: 940, opacity: 1, speed: 0.03 },
+    { image: 2, top: "7%", left: "74%", width: 820, opacity: 0.95, speed: 0.06 },
+    { image: 0, top: "0%", left: "90%", width: 900, opacity: 1, speed: 0.04 },
 
     // Banda secundaria — pegada justo debajo de la primera (sin salto vacío
     // entre ambas), para que el lienzo quede lleno de arriba a abajo
-    { image: 1, top: "38%", left: "2%", width: 700, opacity: 0.8 },
-    { image: 0, top: "44%", left: "24%", width: 640, opacity: 0.75 },
-    { image: 2, top: "36%", left: "46%", width: 700, opacity: 0.8 },
-    { image: 1, top: "46%", left: "66%", width: 640, opacity: 0.75 },
-    { image: 0, top: "38%", left: "86%", width: 680, opacity: 0.8 },
+    { image: 1, top: "38%", left: "2%", width: 700, opacity: 0.8, speed: 0.05 },
+    { image: 0, top: "44%", left: "24%", width: 640, opacity: 0.75, speed: 0.03 },
+    { image: 2, top: "36%", left: "46%", width: 700, opacity: 0.8, speed: 0.06 },
+    { image: 1, top: "46%", left: "66%", width: 640, opacity: 0.75, speed: 0.04 },
+    { image: 0, top: "38%", left: "86%", width: 680, opacity: 0.8, speed: 0.02 },
 ];
 
 const CANVAS_HEIGHT_VH = 120; // alto del lienzo de nubes
-const SCROLL_DISTANCE_VH = 220; // cu\u00e1nto scroll dura todo el efecto (pin + recorrido)
+const SCROLL_DISTANCE_VH = 220; // cuánto scroll dura todo el efecto (pin + recorrido)
+const CLOUD_PARALLAX_RANGE = 30; // recorrido individual máx. por nube: sutil
 
 export default function CloudsTransition() {
     const outerRef = useRef<HTMLDivElement>(null);
     const canvasRef = useRef<HTMLDivElement>(null);
+    const cloudRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
         const outer = outerRef.current;
@@ -61,6 +65,17 @@ export default function CloudsTransition() {
             const offsetVh = startVh + progress * (endVh - startVh);
 
             canvas.style.transform = `translateY(${offsetVh}vh)`;
+
+            // Parallax sutil individual: cada nube se mueve un poco más o
+            // menos que el resto del lienzo, según su propio "speed" — da
+            // sensación de profundidad (algunas más "cerca", otras más
+            // "lejos") en vez de que todas viajen pegadas en bloque.
+            cloudRefs.current.forEach((cloudEl, i) => {
+                if (!cloudEl) return;
+                const cloudOffset = (progress - 0.5) * CLOUDS[i].speed * CLOUD_PARALLAX_RANGE * 10;
+                cloudEl.style.transform = `translateY(${cloudOffset}px)`;
+            });
+
             ticking = false;
         };
 
@@ -95,7 +110,10 @@ export default function CloudsTransition() {
                     {CLOUDS.map((cloud, i) => (
                         <div
                             key={i}
-                            className="absolute"
+                            ref={(el) => {
+                                cloudRefs.current[i] = el;
+                            }}
+                            className="absolute will-change-transform"
                             style={{ top: cloud.top, left: cloud.left, opacity: cloud.opacity }}
                         >
                             {/* eslint-disable-next-line @next/next/no-img-element */}

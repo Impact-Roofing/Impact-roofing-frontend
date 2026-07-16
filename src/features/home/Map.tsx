@@ -7,6 +7,7 @@ export default function Map() {
     const sectionRef = useRef<HTMLDivElement>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const cloudBridgeRef = useRef<HTMLDivElement>(null);
     const hasPlayedRef = useRef(false);
 
     // Reproduce el video una sola vez cuando la sección entra en pantalla
@@ -34,14 +35,13 @@ export default function Map() {
     }, []);
 
     // Parallax: el bloque de texto sube (de abajo hacia arriba) a medida que
-    // se hace scroll a través de la sección. Usa la posición de scroll (no el
-    // ratio de intersección) porque el ratio es simétrico — sube y luego baja
-    // otra vez al salir la sección, lo que provocaba que el contenido
-    // "rebotara" hacia abajo en vez de seguir subiendo. Con rect.top el
-    // movimiento es monótono: mientras bajas, solo sube.
+    // se hace scroll a través de la sección. Y ahora también un parallax
+    // MUY sutil en la nube del puente inferior (bottom-cloud.webp), en el
+    // mismo cálculo de progreso para no duplicar el scroll listener.
     useEffect(() => {
         const section = sectionRef.current;
         const content = contentRef.current;
+        const cloudBridge = cloudBridgeRef.current;
         if (!section || !content) return;
 
         let ticking = false;
@@ -49,7 +49,8 @@ export default function Map() {
         const clamp = (value: number, min: number, max: number) =>
             Math.min(max, Math.max(min, value));
 
-        const RANGE = 360; // recorrido total: +160px (abajo) a -160px (arriba)
+        const RANGE = 360; // recorrido total del texto: +160px (abajo) a -160px (arriba)
+        const CLOUD_RANGE = 24; // recorrido de la nube: sutil, +12px a -12px
 
         const update = () => {
             const rect = section.getBoundingClientRect();
@@ -67,6 +68,15 @@ export default function Map() {
 
             const offset = (0.5 - progress) * RANGE * 2;
             content.style.transform = `translate3d(0, ${offset}px, 0)`;
+
+            if (cloudBridge) {
+                // Muy sutil, y en dirección OPUESTA al texto — la nube ya
+                // tiene su propio -50% base (para quedar centrada en la
+                // costura), así que combinamos ambos con calc().
+                const cloudOffset = (0.5 - progress) * CLOUD_RANGE * 2;
+                cloudBridge.style.transform = `translateY(calc(-50% + ${cloudOffset}px))`;
+            }
+
             ticking = false;
         };
 
@@ -172,9 +182,13 @@ export default function Map() {
 
 
             <div className="relative z-10 hidden h-0 w-full lg:block">
-                <div className="absolute inset-x-0 top-0 aspect-[2/1] w-full -translate-y-1/2">
+                <div
+                    ref={cloudBridgeRef}
+                    className="pointer-events-none absolute inset-x-0 top-0 aspect-[2/1] w-full will-change-transform"
+                    style={{ transform: "translateY(-50%)" }}
+                >
                     <Image
-                        src={`/assets/features/home/hero/hero-clouds-bridge_25.png`}
+                        src={`/assets/features/home/hero/bottom-cloud.webp`}
                         alt=""
                         fill
                         className="object-cover"

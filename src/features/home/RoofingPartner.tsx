@@ -47,7 +47,7 @@ export default function RoofingPartner() {
                 {/* Right — image */}
                 <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl lg:mx-0 lg:justify-self-end">
                     <Image
-                        src="/assets/features/home/partner/partner.png"
+                        src="/assets/features/home/partner/partner.webp"
                         alt="Roofer working on a residential roof under a clear blue sky"
                         fill
                         className="object-cover"
