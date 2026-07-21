@@ -19,14 +19,13 @@ type HeroToMapBridgeProps = {
 export default function HeroToMapBridge({ imageName }: HeroToMapBridgeProps) {
     return (
         <div className="pointer-events-none relative z-10 h-0 w-full">
-            <div className="pointer-events-none absolute inset-x-0 top-0 aspect-[2/1] w-full -translate-y-1/2">
-                <Image
-                    src={`/assets/features/home/hero/${imageName}`}
-                    alt=""
-                    fill
-                    className="object-cover"
-                />
-            </div>
+            {/* "IMPACT" — Subido más hacia arriba y con z-30 para asegurar que esté por encima del Hero */}
+            <h2
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 top-0 -translate-y-[74%] select-none text-center font-jost text-[20vw] font-extrabold leading-none text-[#EDEDED] lg:text-[13vw]"
+            >
+                IMPACT
+            </h2>
         </div>
     );
 }

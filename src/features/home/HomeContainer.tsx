@@ -7,13 +7,14 @@ import Marketplace from "@/features/home/Marketplace";
 import RoofingPartner from "@/features/home/RoofingPartner";
 import FAQ from "@/features/home/FAQ";
 import ContactUs from "@/features/home/ContactUs";
+import About from "@/features/home/about";
 
 export default function HomeContainer() {
     return (
         <main>
             <Hero />
-            <HeroToMapBridge imageName="top-cloud.webp" />
-            <Map/>
+            <HeroToMapBridge />
+            <About/>
             <HowItWorks/>
             <Marketplace/>
             <RoofingPartner/>
