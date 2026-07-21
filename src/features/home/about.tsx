@@ -12,7 +12,7 @@ export default function About() {
             {/* "IMPACT" — Subido más hacia arriba con un translate negativo mayor para que se desborde */}
 
 
-            <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 lg:px-10 lg:pb-24 lg:pt-28">
+            <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 lg:px-10 lg:pb-44 lg:pt-28">
                 <div className="ml-auto max-w-xl text-left">
                     <p className="text-md font-bold tracking-[0.15em] text-[#F2733A] mb-2">
                         ABOUT IMPACT

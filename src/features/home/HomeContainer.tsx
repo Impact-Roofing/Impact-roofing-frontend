@@ -8,6 +8,7 @@ import RoofingPartner from "@/features/home/RoofingPartner";
 import FAQ from "@/features/home/FAQ";
 import ContactUs from "@/features/home/ContactUs";
 import About from "@/features/home/about";
+import Metrics from "@/features/home/metrics";
 
 export default function HomeContainer() {
     return (
@@ -15,6 +16,7 @@ export default function HomeContainer() {
             <Hero />
             <HeroToMapBridge />
             <About/>
+            <Metrics/>
             <HowItWorks/>
             <Marketplace/>
             <RoofingPartner/>
