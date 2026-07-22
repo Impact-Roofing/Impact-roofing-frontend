@@ -25,7 +25,7 @@ export default function OurTeam() {
                 {/* Foto con checklist superpuesto */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl sm:aspect-[16/10] lg:aspect-[16/9]">
                     <Image
-                        src="/assets/features/home/team/our-team.webp"
+                        src="/assets/features/home/team/our-team-2.webp"
                         alt="Our roofing team"
                         fill
                         className="object-cover"
