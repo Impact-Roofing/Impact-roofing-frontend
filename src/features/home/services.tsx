@@ -1,6 +1,6 @@
 "use client";
 
-import ServiceCard, { ServiceItem } from "./servicecard";
+import ServiceCard, { ServiceItem } from "./ServiceCard";
 
 const SERVICES: ServiceItem[] = [
     {
@@ -55,8 +55,41 @@ const SERVICES: ServiceItem[] = [
 
 export default function Services() {
     return (
-        <section id="services" className="w-full bg-white py-20 lg:py-28">
-            <div className="mx-auto max-w-6xl px-6 lg:px-10">
+        <section
+            id="services"
+            className="relative w-full overflow-hidden bg-white py-20 lg:py-28"
+        >
+            {/* Figura naranja decorativa — detrás del header (z-0), misma
+                técnica/forma que usamos en OurTeam.tsx. Mucho más grande
+                ahora, ocupando toda la esquina superior izquierda. */}
+            <div className="pointer-events-none absolute -left-40 -top-8 z-0 w-[145%] sm:-left-160 sm:-top-32 sm:w-[150%] lg:-left-340 lg:-top-60 lg:w-[155%]">
+                <svg
+                    viewBox="0 0 1300 550"
+                    fill="none"
+                    className="h-auto w-full"
+                    preserveAspectRatio="none"
+                >
+                    <defs>
+                        <linearGradient
+                            id="servicesShapeGradient"
+                            x1="0"
+                            y1="0"
+                            x2="1"
+                            y2="0"
+                        >
+                            <stop offset="0%" stopColor="#F2733A" stopOpacity="1" />
+                            <stop offset="45%" stopColor="#F2733A" stopOpacity="0.6" />
+                            <stop offset="100%" stopColor="#F2733A" stopOpacity="0" />
+                        </linearGradient>
+                    </defs>
+                    <path
+                        d="M140 340 L665 160 L1150 330 L665 230 Z"
+                        fill="url(#servicesShapeGradient)"
+                    />
+                </svg>
+            </div>
+
+            <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-10">
                 <div className="text-center">
                     <p className="text-sm font-bold tracking-[0.15em] text-[#F2733A]">
                         WE SPECIALIZE IN
@@ -64,6 +97,9 @@ export default function Services() {
                     <h2 className="mt-3 font-jost text-3xl font-extrabold leading-tight text-[#0B2545] lg:text-5xl">
                         Everything Your Roof Needs
                     </h2>
+                    <p className="mt-3 text-lg font-bold text-[#0B2545] lg:text-xl">
+                        subcontracted / sub-contractor
+                    </p>
                 </div>
 
                 <div className="mt-14 flex flex-col gap-8 lg:gap-10">

@@ -59,12 +59,11 @@ export default function Header() {
                 {/* CTA — ancla a #contact, <a> nativa */}
                 <a
                     href="#contact"
-                    className="group hidden items-center gap-6 rounded-full py-2.5 pl-8 pr-2.5 text-sm font-bold tracking-wider text-white shadow-xl transition-all hover:scale-[1.03] lg:flex"
+                    className="group hidden items-center gap-6 rounded-full py-2.5 pl-8 pr-2.5 text-sm font-bold tracking-wider text-white shadow-md transition-all hover:scale-[1.03] lg:flex"
                     style={{
                         background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%)",
                         backdropFilter: "blur(16px)",
                         WebkitBackdropFilter: "blur(16px)",
-                        boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
                         border: "1px solid rgba(255, 255, 255, 0.25)",
                     }}
                 >
