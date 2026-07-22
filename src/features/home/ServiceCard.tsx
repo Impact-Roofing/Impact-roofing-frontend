@@ -100,7 +100,7 @@ export default function ServiceCard({
                     al disponible y se desborda de la card. object-cover
                     centra y recorta la imagen dentro de esa caja real. */}
                 <div
-                    className={`relative aspect-[3/2] w-full min-h-[240px] overflow-hidden transition-all duration-700 ease-out lg:aspect-auto lg:h-full ${
+                    className={`relative aspect-[3/2] w-full min-h-[240px] overflow-hidden transition-all duration-1900 ease-out lg:aspect-auto lg:h-full ${
                         revealed
                             ? "translate-y-0 opacity-100"
                             : "translate-y-14 opacity-0"
