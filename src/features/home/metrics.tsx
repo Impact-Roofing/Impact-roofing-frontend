@@ -100,12 +100,19 @@ export default function Metrics() {
                                 ?.scrollIntoView({ behavior: "smooth" });
                             history.pushState(null, "", "#contact");
                         }}
-                        className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/15 bg-[#0B2545]/70 py-2.5 pl-6 pr-2 text-sm font-bold tracking-wide text-white transition-transform hover:scale-[1.03]"
+                        className="group mt-8 inline-flex items-center gap-6 rounded-full py-2.5 pl-8 pr-2.5 text-base font-bold tracking-wider text-white shadow-xl transition-all hover:scale-[1.03]"
+                        style={{
+                            background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%)",
+                            backdropFilter: "blur(16px)",
+                            WebkitBackdropFilter: "blur(16px)",
+                            boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+                            border: "1px solid rgba(255, 255, 255, 0.25)",
+                        }}
                     >
                         GET A QUOTE
-                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F2733A] text-white">
-                            <ArrowIcon />
-                        </span>
+                        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FF6E1F] text-[#1E2022] shadow-md transition-transform group-hover:translate-x-1">
+        <ArrowIcon />
+    </span>
                     </a>
                 </div>
 
@@ -135,7 +142,7 @@ export default function Metrics() {
 
 function ArrowIcon() {
     return (
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path
                 d="M5 12H19M19 12L13 6M19 12L13 18"
                 stroke="currentColor"

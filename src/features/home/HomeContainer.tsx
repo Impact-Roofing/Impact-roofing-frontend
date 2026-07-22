@@ -1,14 +1,13 @@
 // features/home/HomeContainer.tsx
 import Hero from "./Hero";
 import HeroToMapBridge from "./HeroToMapBridge";
-import Map from "./Map";
-import HowItWorks from "@/features/home/HowItWorks";
 import Marketplace from "@/features/home/Marketplace";
-import RoofingPartner from "@/features/home/RoofingPartner";
-import FAQ from "@/features/home/FAQ";
 import ContactUs from "@/features/home/ContactUs";
 import About from "@/features/home/about";
 import Metrics from "@/features/home/metrics";
+import Services from "@/features/home/services";
+import OurTeam from "@/features/home/OurTeam";
+import SVGBridge from "@/features/home/SVGBridge";
 
 export default function HomeContainer() {
     return (
@@ -17,12 +16,11 @@ export default function HomeContainer() {
             <HeroToMapBridge />
             <About/>
             <Metrics/>
-            <HowItWorks/>
+            <Services/>
             <Marketplace/>
-            <RoofingPartner/>
-            <FAQ/>
+            <OurTeam/>
+            <SVGBridge/>
             <ContactUs/>
-
         </main>
     );
 }

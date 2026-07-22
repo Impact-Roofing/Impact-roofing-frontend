@@ -155,6 +155,25 @@ export default function Marketplace() {
                     </a>
                 </div>
             </div>
+
+            {/* Franja naranja ondulada — pegada al borde INFERIOR de la
+                sección, misma técnica que las franjas de Metrics.tsx /
+                ServiceCard.tsx (preserveAspectRatio="none" para que se
+                estire bien a cualquier ancho). */}
+            <div className="absolute inset-x-0 bottom-0 z-20 leading-none">
+                <svg
+                    viewBox="0 0 1921 55"
+                    fill="#FF6E1F"
+                    preserveAspectRatio="none"
+                    className="h-6 w-full lg:h-10"
+                >
+                    <path
+                        d="M0.500005 0.519852L0.5 58.5199L1920.5 58.52L1920.5 6.82437L960.5 37.5199L0.500005 0.519852Z"
+                        fill="#FF6E1F"
+                        stroke="#FF6E1F"
+                    />
+                </svg>
+            </div>
         </section>
     );
 }

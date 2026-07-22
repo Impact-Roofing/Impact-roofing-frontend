@@ -33,11 +33,6 @@ export default function RootLayout({
             {children}
             <FloatingActions />
             <Footer />
-            <ProgressiveBlur edge="top" />
-            {/* Se oculta cuando faltan menos de 900px para el final absoluto de
-            la página (el footer siempre es lo último) — ya no depende de
-            encontrar ningún id puntual. */}
-            <ProgressiveBlur edge="bottom" hideNearPageEnd={500} />
         </GoogleMapsProvider>
 
         </body>

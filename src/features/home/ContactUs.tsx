@@ -121,7 +121,7 @@ export default function ContactUs() {
     };
 
     return (
-        <section id="contact" className="w-full bg-white py-20 lg:py-28">
+        <section id="contact" className="w-full bg-white  py-20 lg:py-28">
             <div className="mx-auto max-w-6xl px-6 lg:px-10">
                 {/* Fila 1 — texto, ancho completo, arriba de todo */}
                 <div className="max-w-2xl">
