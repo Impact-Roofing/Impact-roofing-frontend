@@ -21,7 +21,7 @@ const ADVANCED_ITEMS = [
 export default function Marketplace() {
     return (
         <section
-            id="solutions"
+            id="how-it-works"
             className="relative w-full overflow-hidden bg-[#011C2D] py-20 lg:py-28"
         >
             {/* Foto de fondo, desenfocada + oscurecida — mismo patrón que Metrics.tsx */}

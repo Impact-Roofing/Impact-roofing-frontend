@@ -62,7 +62,7 @@ export default function Services() {
             {/* Figura naranja decorativa — detrás del header (z-0), misma
                 técnica/forma que usamos en OurTeam.tsx. Mucho más grande
                 ahora, ocupando toda la esquina superior izquierda. */}
-            <div className="pointer-events-none absolute -left-40 -top-8 z-0 w-[145%] sm:-left-160 sm:-top-32 sm:w-[150%] lg:-left-340 lg:-top-60 lg:w-[155%]">
+            <div className="pointer-events-none absolute -left-70 -top-8 z-0 w-[145%] sm:-left-160 sm:-top-32 sm:w-[150%] lg:-left-340 lg:-top-60 lg:w-[155%]">
                 <svg
                     viewBox="0 0 1300 550"
                     fill="none"

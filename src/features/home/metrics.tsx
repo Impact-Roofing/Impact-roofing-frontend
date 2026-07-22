@@ -12,7 +12,7 @@ const STATS = [
 export default function Metrics() {
     return (
         <section
-            id="metrics"
+            id="about"
             className="relative w-full overflow-hidden bg-[#011C2D] py-20 lg:py-28"
         >
             {/* Franja naranja ondulada — decorativa, pegada al borde superior */}

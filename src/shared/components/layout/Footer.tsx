@@ -5,10 +5,10 @@ import Link from "next/link";
 // mismo motivo (evitar que los hashes se apilen en la URL en vez de
 // reemplazarse).
 const NAVIGATE_LINKS = [
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Solutions", href: "#solutions" },
     { label: "About", href: "#about" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Services", href: "#services" },
+    { label: "How It Works", href: "#how-it-works" },
+    { label: "Our Team", href: "#our-team" },
 ];
 
 const COMPANY_LINKS = [{ label: "Contact", href: "#contact" }];

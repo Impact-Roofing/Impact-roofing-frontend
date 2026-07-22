@@ -19,10 +19,10 @@ type NavLink = {
 // Nota: "FAQ" apuntaba a "/#site-footer" (el id del footer, no el de la
 // sección FAQ) — lo corregí a "#faq", que es el id real de esa sección.
 const NAV_LINKS: NavLink[] = [
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Solutions", href: "#solutions" },
     { label: "About", href: "#about" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Services", href: "#services" },
+    { label: "How it works", href: "#how-it-works" },
+    { label: "Our team", href: "#our-team" },
 ];
 
 export default function Header() {

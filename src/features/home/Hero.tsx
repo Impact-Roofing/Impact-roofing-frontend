@@ -60,8 +60,12 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Badge "100% Happy customers" — esquina inferior derecha */}
-            <div className="absolute bottom-6 right-6 z-20 lg:bottom-60 lg:right-20">
+            {/* Badge "100% Happy customers" — esquina inferior derecha.
+                bottom-4 en mobile (antes bottom-25, que lo dejaba pisando el
+                botón "LET'S GET STARTED" porque el contenido de arriba no
+                tiene una altura fija — con menos offset queda pegado al
+                borde real de abajo, lejos del botón). */}
+            <div className="absolute bottom-4 right-6 z-20 lg:bottom-60 lg:right-20">
                 {/* Contenedor principal con overflow-visible para que el check pueda sobresalir */}
                 <div
                     className="relative overflow-visible flex items-center gap-4 rounded-full border border-white/40 py-3 pl-3 pr-8 lg:gap-6 lg:py-2 lg:pl-5 lg:pr-12 shadow-2xl"
@@ -91,18 +95,18 @@ export default function Hero() {
 
                     {/* Textos */}
                     <div className="flex flex-col leading-none relative z-10">
-            <span className="text-3xl font-extrabold text-white lg:text-3xl tracking-tight">
-                100%
-            </span>
+                        <span className="text-3xl font-extrabold text-white lg:text-3xl tracking-tight">
+                            100%
+                        </span>
                         <span className="text-xs text-white/90 lg:text-base font-medium ">
-                Happy customers
-            </span>
+                            Happy customers
+                        </span>
                     </div>
 
                     {/* Check flotante con overflow visible fuera de la píldora */}
                     <span className="absolute -top-3 -right-2 lg:-top-4 lg:right-3 flex h-12 w-12 lg:h-8 lg:w-8 shrink-0 items-center justify-center rounded-full bg-[#F2733A] shadow-xl z-30">
-            <CheckIcon />
-        </span>
+                        <CheckIcon />
+                    </span>
                 </div>
             </div>
         </section>
