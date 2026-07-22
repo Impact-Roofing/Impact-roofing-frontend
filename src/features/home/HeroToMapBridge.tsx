@@ -17,7 +17,7 @@ export default function HeroToMapBridge() {
             {/* "IMPACT" — Subido más hacia arriba y con z-30 para asegurar que esté por encima del Hero */}
             <h2
                 aria-hidden
-                className="pointer-events-none absolute inset-x-0 top-0 -translate-y-[78%] select-none text-center font-jost text-[20vw] font-extrabold leading-none text-[#EDEDED] lg:text-[13vw]"
+                className="pointer-events-none absolute inset-x-0 top-0 -translate-y-[78%] select-none text-center font-jost text-[20vw] font-extrabold leading-none text-[#f5f5f5] lg:text-[13vw]"
             >
                 IMPACT
             </h2>

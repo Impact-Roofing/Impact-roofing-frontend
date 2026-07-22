@@ -8,7 +8,7 @@ const SOCIAL_LINKS = [
 
 export default function About() {
     return (
-        <section id="about" className="relative w-full overflow-hidden bg-[#EDEDED]">
+        <section id="about" className="relative w-full overflow-hidden bg-[#f5f5f5]">
             {/* "IMPACT" — Subido más hacia arriba con un translate negativo mayor para que se desborde */}
 
 

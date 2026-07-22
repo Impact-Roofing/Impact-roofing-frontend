@@ -48,7 +48,12 @@ export default function ServiceCard({
     return (
         <div
             ref={cardRef}
-            className="relative overflow-hidden rounded-3xl bg-[#EDEDED]"
+            className="relative overflow-hidden shadow-md rounded-3xl"
+            style={{
+                background: "linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 65%, #EDEDED 100%)",
+                WebkitBackdropFilter: "blur(16px)",
+                boxShadow: "0 5px 15px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+            }}
         >
             {/* Franja navy ondulada — igual técnica que la naranja de Metrics.tsx */}
             <div className="absolute inset-x-0 top-0 z-10 leading-none">
