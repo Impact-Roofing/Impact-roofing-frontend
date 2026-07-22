@@ -56,20 +56,22 @@ export default function Header() {
                 </nav>
 
                 {/* CTA — ancla a #contact, <a> nativa */}
+                {/* CTA — ancla a #contact, <a> nativa */}
                 <a
                     href="#contact"
-                    className="group hidden items-center gap-4 rounded-full pl-8 pr-2 py-2 text-sm font-bold tracking-wide text-white transition-all hover:scale-[1.03] lg:flex"
+                    className="group hidden items-center gap-6 rounded-full py-2.5 pl-8 pr-2.5 text-sm font-bold tracking-wider text-white shadow-xl transition-all hover:scale-[1.03] lg:flex"
                     style={{
-                        background: "rgba(255, 255, 255, 0.15)",
-                        backdropFilter: "blur(12px)",
-                        WebkitBackdropFilter: "blur(12px)",
-                        boxShadow: "0 8px 20px rgba(0, 0, 0, 0.05)",
+                        background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%)",
+                        backdropFilter: "blur(16px)",
+                        WebkitBackdropFilter: "blur(16px)",
+                        boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+                        border: "1px solid rgba(255, 255, 255, 0.25)",
                     }}
                 >
                     CONTACT US
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545] transition-transform group-hover:rotate-[-10deg]">
-                        <ArrowIcon />
-                    </span>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#FF6E1F] text-white shadow-md transition-transform group-hover:translate-x-1">
+        <ArrowIcon />
+    </span>
                 </a>
 
                 {/* Mobile toggle */}
@@ -110,16 +112,19 @@ export default function Header() {
                         <a
                             href="#contact"
                             onClick={() => setIsMenuOpen(false)}
-                            className="mt-3 flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold tracking-wide text-white"
+                            className="group mt-3 flex items-center justify-between rounded-full py-2.5 pl-8 pr-2 text-sm font-bold tracking-wider text-white shadow-lg transition-all hover:scale-[1.03]"
                             style={{
-                                background: "rgba(255,255,255,0.1)",
-                                border: "1px solid rgba(255,255,255,0.1)",
+                                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%)",
+                                backdropFilter: "blur(16px)",
+                                WebkitBackdropFilter: "blur(16px)",
+                                boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+                                border: "1px solid rgba(255, 255, 255, 0.25)",
                             }}
                         >
                             CONTACT US
-                            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545]">
-                                <ArrowIcon />
-                            </span>
+                            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#FF6E1F] text-white shadow-md transition-transform group-hover:translate-x-1">
+        <ArrowIcon />
+    </span>
                         </a>
                     </nav>
                 </div>

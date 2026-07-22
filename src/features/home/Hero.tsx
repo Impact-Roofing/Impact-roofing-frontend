@@ -45,14 +45,17 @@ export default function Hero() {
                         }}
                         className="group relative z-[999] mt-8 inline-flex items-center gap-6 rounded-full py-3 pl-8 pr-2 text-lg font-bold tracking-wide text-white transition-all hover:scale-[1.03]"
                         style={{
-                            background: "rgba(255, 255, 255, 0.18)",
-                            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.08)",
+                            background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%)",
+                            backdropFilter: "blur(16px)",
+                            WebkitBackdropFilter: "blur(16px)",
+                            boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+                            border: "1px solid rgba(255, 255, 255, 0.25)",
                         }}
                     >
                         LET&apos;S GET STARTED
-                        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#8ED2EE] text-[#0B2545] transition-transform group-hover:translate-x-1">
-                            <ArrowIcon />
-                        </span>
+                        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FF6E1F] text-white shadow-md transition-transform group-hover:translate-x-1">
+        <ArrowIcon />
+    </span>
                     </a>
                 </div>
             </div>

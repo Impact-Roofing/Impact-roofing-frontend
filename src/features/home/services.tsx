@@ -84,7 +84,7 @@ export default function Services() {
                         }}
                         className="group inline-flex items-center gap-6 rounded-full py-2.5 pl-8 pr-2.5 text-base font-bold tracking-wider text-[#0B2545] transition-all hover:scale-[1.03]"
                         style={{
-                            background: "linear-gradient(180deg, #FFFFFF 0%, #F0F2F5 100%)",
+                            background: "linear-gradient(180deg, #F0F2F5 0%, #FFFFFF 100%)",
                             boxShadow: "0 10px 25px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1)",
                             border: "1px solid rgba(0, 0, 0, 0.06)",
                         }}
