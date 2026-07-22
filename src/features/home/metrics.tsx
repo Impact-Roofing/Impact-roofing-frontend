@@ -34,7 +34,7 @@ export default function Metrics() {
             {/* Foto de fondo, desenfocada + oscurecida */}
             <div className="absolute inset-0">
                 <Image
-                    src="/assets/features/home/metrics/metrics-background.png"
+                    src="/assets/features/home/metrics/metrics-background.webp"
                     alt=""
                     fill
                     className="object-cover blur-sm"

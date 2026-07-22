@@ -27,7 +27,7 @@ export default function Marketplace() {
             {/* Foto de fondo, desenfocada + oscurecida — mismo patrón que Metrics.tsx */}
             <div className="absolute inset-0">
                 <Image
-                    src="/assets/features/home/marketplace/marketplace-background.png"
+                    src="/assets/features/home/marketplace/marketplace-background.webp"
                     alt=""
                     fill
                     className="object-cover blur-sm"

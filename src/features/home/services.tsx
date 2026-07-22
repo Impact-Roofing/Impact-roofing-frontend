@@ -13,7 +13,7 @@ const SERVICES: ServiceItem[] = [
             "Expert installation from start to finish",
             "Built to protect for decades",
         ],
-        image: "/assets/features/home/services/roofing_.png",
+        image: "/assets/features/home/services/roofing.webp",
     },
     {
         category: "SIDING",
@@ -25,7 +25,7 @@ const SERVICES: ServiceItem[] = [
             "Increased weather protection",
             "Durable, low-maintenance materials",
         ],
-        image: "/assets/features/home/services/siding_.png",
+        image: "/assets/features/home/services/siding.webp",
     },
     {
         category: "GUTTERS",
@@ -37,7 +37,7 @@ const SERVICES: ServiceItem[] = [
             "Improves drainage & prevents water damage",
             "Built for long-lasting performance",
         ],
-        image: "/assets/features/home/services/gutter_.png",
+        image: "/assets/features/home/services/gutter.webp",
     },
     {
         category: "LADDER ASSIST",
@@ -49,7 +49,7 @@ const SERVICES: ServiceItem[] = [
             "Prevents structural damage",
             "Reliable, long-lasting solutions",
         ],
-        image: "/assets/features/home/services/ladder_.png",
+        image: "/assets/features/home/services/ladder.webp",
     },
 ];
 
