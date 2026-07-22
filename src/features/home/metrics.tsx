@@ -13,7 +13,7 @@ export default function Metrics() {
     return (
         <section
             id="about"
-            className="relative w-full overflow-hidden bg-[#011C2D] py-20 lg:py-28"
+            className="relative w-full overflow-hidden bg-[#011C2D]  py-20 lg:py-28"
         >
             {/* Franja naranja ondulada — decorativa, pegada al borde superior */}
             <div className="absolute inset-x-0 top-0 z-20 leading-none">
