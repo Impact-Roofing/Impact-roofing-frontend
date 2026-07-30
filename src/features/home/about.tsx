@@ -1,4 +1,7 @@
+'use client';
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 
 const SOCIAL_LINKS = [
     { href: "https://instagram.com", label: "Instagram", Icon: InstagramIcon },
@@ -7,29 +10,82 @@ const SOCIAL_LINKS = [
 ];
 
 export default function About() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [hasAnimated, setHasAnimated] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    setHasAnimated(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.2 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [hasAnimated]);
+
     return (
-        <section className="relative w-full overflow-hidden bg-[#f5f5f5]">
-            {/* "IMPACT" — Subido más hacia arriba con un translate negativo mayor para que se desborde */}
-
-
+        <section ref={sectionRef} className="relative w-full overflow-hidden bg-[#f5f5f5]">
             <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-20 lg:px-10 lg:pb-44 lg:pt-28">
                 <div className="ml-auto max-w-xl text-left">
-                    <p className="text-md font-bold tracking-[0.15em] text-[#F2733A] mb-2">
-                        ABOUT IMPACT
-                    </p>
 
-                    {/* Párrafo fluido con el FlairIcon y las redes sociales integradas en línea */}
-                    <p className="font-jost text-2xl leading-relaxed lg:text-4xl text-[#0B2545]/50">
-                        <span className="inline-block align-middle mr-2 text-[#F2733A]">
+                    {/* 1. Título superior (Entrada desde ARRIBA - 0ms) */}
+                    <div
+                        style={{ willChange: 'transform, opacity' }}
+                        className={`transition-all duration-1000 ease-out ${
+                            hasAnimated
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 -translate-y-8'
+                        }`}
+                    >
+                        <p className="text-md font-bold tracking-[0.15em] text-[#F2733A] mb-2">
+                            ABOUT IMPACT
+                        </p>
+                    </div>
+
+                    {/* Contenedor del párrafo dividido para animar cada elemento independiente */}
+                    <p className="font-jost text-2xl leading-relaxed lg:text-4xl text-[#0B2545]/50 flex flex-wrap items-center gap-y-2">
+
+                        {/* 2. Icono decorativo (Aparición con escala desde el centro - Retraso de 200ms) */}
+                        <span
+                            style={{ willChange: 'transform, opacity' }}
+                            className={`inline-block align-middle mr-2 text-[#F2733A] transition-all duration-1000 delay-200 ease-out ${
+                                hasAnimated
+                                    ? 'opacity-100 scale-100'
+                                    : 'opacity-0 scale-50'
+                            }`}
+                        >
                             <FlairIcon size={120} />
                         </span>
-                        <span className="font-normal text-[#0B2545]">
-                            Impact Roofing is a trusted roofing company
-                        </span>{" "}
-                        that protects homes with expert craftsmanship and lasting solutions.{" "}
 
-                        {/* Redes sociales integradas inline al final del texto */}
-                        <span className="inline-flex items-center gap-2 align-middle ml-2 mt-1">
+                        {/* 3. Texto descriptivo (Entrada desde la IZQUIERDA - Retraso de 400ms) */}
+                        <span
+                            style={{ willChange: 'transform, opacity' }}
+                            className={`inline font-normal text-[#0B2545] transition-all duration-1000 delay-400 ease-out ${
+                                hasAnimated
+                                    ? 'opacity-100 translate-x-0'
+                                    : 'opacity-0 -translate-x-16'
+                            }`}
+                        >
+                            Impact Roofing is a trusted roofing company that protects homes with expert craftsmanship and lasting solutions.
+                        </span>
+
+                        {/* 4. Redes sociales (Entrada desde la DERECHA - Retraso de 600ms) */}
+                        <span
+                            style={{ willChange: 'transform, opacity' }}
+                            className={`inline-flex items-center gap-2 align-middle ml-2 transition-all duration-1000 delay-600 ease-out ${
+                                hasAnimated
+                                    ? 'opacity-100 translate-x-0'
+                                    : 'opacity-0 translate-x-16'
+                            }`}
+                        >
                             {SOCIAL_LINKS.map(({ href, label, Icon }) => (
                                 <a
                                     key={label}
@@ -53,8 +109,6 @@ export default function About() {
 type IconProps = { size?: number; className?: string };
 
 export const FlairIcon = ({ size = 193, className }: IconProps) => {
-    // Calculamos el alto proporcional basado en la relación original (193x34)
-    // height = width * (34 / 193) -> aproximadamente width * 0.17616
     const calculatedHeight = Math.round(size * (34 / 193));
 
     return (

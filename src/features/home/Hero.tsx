@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const AVATARS = [
     "/assets/features/home/hero/avatar-1.png",
@@ -9,8 +10,32 @@ const AVATARS = [
 ];
 
 export default function Hero() {
+    const heroRef = useRef<HTMLElement>(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsLoaded(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (heroRef.current) {
+            observer.observe(heroRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <section className="relative flex h-[100vh] w-full items-center overflow-hidden sm:h-[105vh] lg:h-[120vh]">
+        <section
+            ref={heroRef}
+            className="relative flex h-[100vh] w-full items-center overflow-hidden sm:h-[105vh] lg:h-[120vh]"
+        >
             <div className="absolute inset-0 h-[100vh] w-full sm:h-[105vh] lg:h-[120vh]">
                 <Image
                     src="/assets/features/home/hero/hero.webp"
@@ -24,8 +49,16 @@ export default function Hero() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#0B2545]/65 via-[#0B2545]/30 to-transparent" />
 
             <div className="relative z-10 mx-auto w-full max-w-[1500px] px-6 lg:px-16">
-                <div className="max-w-xl">
-                    <h1 className="text-5xl font-jost font-medium text-white lg:text-6xl lg:-mt-40">
+                {/* Contenedor del texto con animación de izquierda a derecha (slideX + fade) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`max-w-xl transition-all duration-1000 ease-out ${
+                        isLoaded
+                            ? 'opacity-100 translate-x-0'
+                            : 'opacity-0 -translate-x-12'
+                    }`}
+                >
+                    <h1 className="text-5xl font-jost font-medium text-white lg:text-7xl lg:-mt-40">
                         The Easiest way to
                         <br />
                         <span className="text-[#011C2D]">Buy a Roof</span>
@@ -54,15 +87,14 @@ export default function Hero() {
                     >
                         LET&apos;S GET STARTED
                         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FF6E1F] text-white shadow-md transition-transform group-hover:translate-x-1">
-        <ArrowIcon />
-    </span>
+                            <ArrowIcon />
+                        </span>
                     </a>
                 </div>
             </div>
 
-            {/* Badge "100% Happy customers" — esquina inferior derecha (Oculto en mobile, visible desde lg) */}
+            {/* Badge "100% Happy customers" — esquina inferior derecha */}
             <div className="hidden lg:flex absolute bottom-4 right-6 z-20 lg:bottom-60 lg:right-20">
-                {/* Contenedor principal con overflow-visible para que el check pueda sobresalir */}
                 <div
                     className="relative overflow-visible flex items-center gap-4 rounded-full border border-white/40 py-3 pl-3 pr-8 lg:gap-6 lg:py-2 lg:pl-5 lg:pr-12 shadow-2xl"
                     style={{
@@ -71,7 +103,6 @@ export default function Hero() {
                         WebkitBackdropFilter: "blur(16px)",
                     }}
                 >
-                    {/* Stack de avatares más grandes y superpuestos */}
                     <div className="flex -space-x-5 relative z-10">
                         {AVATARS.map((src, i) => (
                             <div
@@ -89,20 +120,18 @@ export default function Hero() {
                         ))}
                     </div>
 
-                    {/* Textos */}
                     <div className="flex flex-col leading-none relative z-10">
-            <span className="text-3xl font-extrabold text-white lg:text-3xl tracking-tight">
-                100%
-            </span>
+                        <span className="text-3xl font-extrabold text-white lg:text-3xl tracking-tight">
+                            100%
+                        </span>
                         <span className="text-xs text-white/90 lg:text-base font-medium ">
-                Happy customers
-            </span>
+                            Happy customers
+                        </span>
                     </div>
 
-                    {/* Check flotante con overflow visible fuera de la píldora */}
                     <span className="absolute -top-3 -right-2 lg:-top-4 lg:right-3 flex h-12 w-12 lg:h-8 lg:w-8 shrink-0 items-center justify-center rounded-full bg-[#F2733A] shadow-xl z-30">
-            <CheckIcon />
-        </span>
+                        <CheckIcon />
+                    </span>
                 </div>
             </div>
         </section>

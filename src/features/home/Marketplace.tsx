@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const TRADITIONAL_ITEMS = [
     "Endless Follow-Ups",
@@ -19,12 +20,34 @@ const ADVANCED_ITEMS = [
 ];
 
 export default function Marketplace() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [hasAnimated, setHasAnimated] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    setHasAnimated(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.15 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [hasAnimated]);
+
     return (
         <section
+            ref={sectionRef}
             id="how-it-works"
             className="relative w-full overflow-hidden bg-[#011C2D] py-20 lg:py-28"
         >
-            {/* Foto de fondo, desenfocada + oscurecida — mismo patrón que Metrics.tsx */}
+            {/* Foto de fondo, desenfocada + oscurecida */}
             <div className="absolute inset-0">
                 <Image
                     src="/assets/features/home/marketplace/marketplace-background.webp"
@@ -36,20 +59,40 @@ export default function Marketplace() {
             </div>
 
             <div className="relative z-10 mx-auto max-w-6xl px-6 lg:px-10">
-                <p className="text-md font-semibold tracking-[0.15em] text-[#F2733A]">
-                    A MODERN MARKETPLACE
-                </p>
-                <h2 className="mt-3 font-jost text-4xl font-medium leading-tight text-white lg:text-6xl">
-                    Everything Your Roof Needs.
-                </h2>
-                <p className="mt-3 max-w-xl text-lg text-white">
-                    From your free quote to the final installation, we make the
-                    roofing process simple, transparent, and stress-free.
-                </p>
 
+                {/* 1. Encabezado principal (Entrada desde abajo - Tiempo 0ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`transition-all duration-1000 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-10'
+                    }`}
+                >
+                    <p className="text-md font-semibold tracking-[0.15em] text-[#F2733A]">
+                        A MODERN MARKETPLACE
+                    </p>
+                    <h2 className="mt-3 font-jost text-4xl font-medium leading-tight text-white lg:text-6xl">
+                        Everything Your Roof Needs.
+                    </h2>
+                    <p className="mt-3 max-w-xl text-lg text-white">
+                        From your free quote to the final installation, we make the
+                        roofing process simple, transparent, and stress-free.
+                    </p>
+                </div>
+
+                {/* Contenedor de Tarjetas */}
                 <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
-                    {/* The Traditional Way — un solo panel "glass" continuo */}
-                    <div className="overflow-hidden rounded-3xl">
+
+                    {/* 2. Tarjeta Izquierda (Entrada desde la IZQUIERDA - Retraso de 200ms) */}
+                    <div
+                        style={{ willChange: 'transform, opacity' }}
+                        className={`overflow-hidden rounded-3xl transition-all duration-1000 delay-200 ease-out ${
+                            hasAnimated
+                                ? 'opacity-100 translate-x-0 translate-y-0'
+                                : 'opacity-0 -translate-x-12 translate-y-4'
+                        }`}
+                    >
                         <div
                             className="flex h-full flex-col gap-8 px-8 py-10"
                             style={{
@@ -78,16 +121,23 @@ export default function Marketplace() {
                                     <div key={item} className="flex items-center gap-3">
                                         <XCircleIcon />
                                         <span className="text-base font-medium text-white">
-                        {item}
-                    </span>
+                                            {item}
+                                        </span>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </div>
 
-                    {/* The Advanced Way — barra naranja arriba + panel "glass" abajo */}
-                    <div className="overflow-hidden rounded-3xl">
+                    {/* 3. Tarjeta Derecha (Entrada desde la DERECHA - Retraso de 400ms) */}
+                    <div
+                        style={{ willChange: 'transform, opacity' }}
+                        className={`overflow-hidden rounded-3xl transition-all duration-1000 delay-400 ease-out ${
+                            hasAnimated
+                                ? 'opacity-100 translate-x-0 translate-y-0'
+                                : 'opacity-0 translate-x-12 translate-y-4'
+                        }`}
+                    >
                         <div className="flex items-center justify-center bg-[#F3752B] px-8 py-4">
                             <p className="text-lg font-extrabold tracking-wide text-[#0B2545]">
                                 THE ADVANCED WAY
@@ -121,8 +171,8 @@ export default function Marketplace() {
                                     <div key={item} className="flex items-center gap-3">
                                         <CheckCircleIcon />
                                         <span className="text-base font-medium text-white">
-                        {item}
-                    </span>
+                                            {item}
+                                        </span>
                                     </div>
                                 ))}
                             </div>
@@ -130,7 +180,15 @@ export default function Marketplace() {
                     </div>
                 </div>
 
-                <div className="mt-10 flex justify-center">
+                {/* 4. Botón inferior (Entrada desde abajo con retraso de 600ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`mt-10 flex justify-center transition-all duration-1000 delay-1000 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-y-0 scale-100'
+                            : 'opacity-0 translate-y-8 scale-95'
+                    }`}
+                >
                     <a
                         href="#contact"
                         onClick={(e) => {
@@ -142,7 +200,6 @@ export default function Marketplace() {
                         }}
                         className="group inline-flex items-center gap-6 rounded-full py-2.5 pl-8 pr-2.5 text-base font-bold tracking-wider text-white shadow-xl transition-all hover:scale-[1.03]"
                         style={{
-                            // Modificamos el gradiente para que el tono inferior sea menos pesado (#2C2F33 en vez de #202225)
                             background: "linear-gradient(180deg, #3A3D42 0%, #2C2F33 100%)",
                             boxShadow: "0 10px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
                             border: "1px solid rgba(255, 255, 255, 0.1)",
@@ -150,16 +207,13 @@ export default function Marketplace() {
                     >
                         LET&apos;S GET STARTED
                         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FF6E1F] text-[#1E2022] shadow-md transition-transform group-hover:translate-x-1">
-            <ArrowIcon />
-        </span>
+                            <ArrowIcon />
+                        </span>
                     </a>
                 </div>
             </div>
 
-            {/* Franja naranja ondulada — pegada al borde INFERIOR de la
-                sección, misma técnica que las franjas de Metrics.tsx /
-                ServiceCard.tsx (preserveAspectRatio="none" para que se
-                estire bien a cualquier ancho). */}
+            {/* Franja naranja ondulada — pegada al borde INFERIOR de la sección */}
             <div className="absolute inset-x-0 bottom-0 z-20 leading-none">
                 <svg
                     viewBox="0 0 1921 55"

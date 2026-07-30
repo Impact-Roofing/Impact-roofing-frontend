@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const STATS = [
     { value: "350+", label: "Projects Completed" },
@@ -10,10 +11,32 @@ const STATS = [
 ];
 
 export default function Metrics() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [hasAnimated, setHasAnimated] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    setHasAnimated(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.15 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [hasAnimated]);
+
     return (
         <section
+            ref={sectionRef}
             id="about"
-            className="relative w-full overflow-hidden bg-[#011C2D]  py-20 lg:py-28"
+            className="relative w-full overflow-hidden bg-[#011C2D] py-20 lg:py-28"
         >
             {/* Franja naranja ondulada — decorativa, pegada al borde superior */}
             <div className="absolute inset-x-0 top-0 z-20 leading-none">
@@ -42,9 +65,18 @@ export default function Metrics() {
                 <div className="absolute inset-0 bg-[#000000]/50" />
             </div>
 
+            {/* Contenedor principal */}
             <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 gap-16 px-6 pt-6 lg:grid-cols-2 lg:gap-12 lg:px-10 lg:pt-10">
-                {/* Izquierda — copy + barras + CTA */}
-                <div>
+
+                {/* 1. Izquierda — Copy + Título + Párrafo (Entrada desde la IZQUIERDA - 0ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`transition-all duration-1000 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-x-0'
+                            : 'opacity-0 -translate-x-12'
+                    }`}
+                >
                     <p className="text-sm font-bold tracking-[0.15em] text-[#F2733A]">
                         ABOUT US
                     </p>
@@ -62,62 +94,88 @@ export default function Metrics() {
                         home for years to come.
                     </p>
 
-                    {/* Barra 1 — Precision & Craftsmanship, 100% */}
-                    <div className="mt-8 max-w-md">
-                        <div className="flex items-center justify-between">
-                            <span className="text-sm font-semibold text-[#F2733A]">
-                                Precision &amp; Craftsmanship
-                            </span>
-                            <span className="text-lg font-extrabold text-[#F2733A]">
-                                100%
-                            </span>
-                        </div>
-                        <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-white/15">
-                            <div className="h-full w-full rounded-full bg-[#F2733A]" />
-                        </div>
-                    </div>
-
-                    {/* Barra 2 — Unresolved Issues, 0% */}
-                    <div className="mt-5 max-w-md">
-                        <div className="flex items-center justify-between">
-                            <span className="text-sm font-semibold text-white">
-                                Unresolved Issues
-                            </span>
-                            <span className="text-lg font-extrabold text-white">
-                                0%
-                            </span>
-                        </div>
-                        <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-white/15" />
-                    </div>
-
-                    {/* CTA */}
-                    <a
-                        href="#contact"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            document
-                                .getElementById("contact")
-                                ?.scrollIntoView({ behavior: "smooth" });
-                            history.pushState(null, "", "#contact");
-                        }}
-                        className="group mt-8 inline-flex items-center gap-6 rounded-full py-2.5 pl-8 pr-2.5 text-base font-bold tracking-wider text-white shadow-xl transition-all hover:scale-[1.03]"
-                        style={{
-                            background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%)",
-                            backdropFilter: "blur(16px)",
-                            WebkitBackdropFilter: "blur(16px)",
-                            boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
-                            border: "1px solid rgba(255, 255, 255, 0.25)",
-                        }}
+                    {/* 2. Barras de progreso (Entrada con retraso - 200ms) */}
+                    <div
+                        style={{ willChange: 'transform, opacity' }}
+                        className={`transition-all duration-1000 delay-200 ease-out ${
+                            hasAnimated
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-6'
+                        }`}
                     >
-                        GET A QUOTE
-                        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FF6E1F] text-[#1E2022] shadow-md transition-transform group-hover:translate-x-1">
-        <ArrowIcon />
-    </span>
-                    </a>
+                        {/* Barra 1 — Precision & Craftsmanship, 100% */}
+                        <div className="mt-8 max-w-md">
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm font-semibold text-[#F2733A]">
+                                    Precision &amp; Craftsmanship
+                                </span>
+                                <span className="text-lg font-extrabold text-[#F2733A]">
+                                    100%
+                                </span>
+                            </div>
+                            <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-white/15">
+                                <div className="h-full w-full rounded-full bg-[#F2733A]" />
+                            </div>
+                        </div>
+
+                        {/* Barra 2 — Unresolved Issues, 0% */}
+                        <div className="mt-5 max-w-md">
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm font-semibold text-white">
+                                    Unresolved Issues
+                                </span>
+                                <span className="text-lg font-extrabold text-white">
+                                    0%
+                                </span>
+                            </div>
+                            <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-white/15" />
+                        </div>
+                    </div>
+
+                    {/* 3. CTA (Entrada desde abajo con retraso - 400ms) */}
+                    <div
+                        style={{ willChange: 'transform, opacity' }}
+                        className={`transition-all duration-1000 delay-400 ease-out ${
+                            hasAnimated
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-8'
+                        }`}
+                    >
+                        <a
+                            href="#contact"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                document
+                                    .getElementById("contact")
+                                    ?.scrollIntoView({ behavior: "smooth" });
+                                history.pushState(null, "", "#contact");
+                            }}
+                            className="group mt-8 inline-flex items-center gap-6 rounded-full py-2.5 pl-8 pr-2.5 text-base font-bold tracking-wider text-white shadow-xl transition-all hover:scale-[1.03]"
+                            style={{
+                                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%)",
+                                backdropFilter: "blur(16px)",
+                                WebkitBackdropFilter: "blur(16px)",
+                                boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+                                border: "1px solid rgba(255, 255, 255, 0.25)",
+                            }}
+                        >
+                            GET A QUOTE
+                            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FF6E1F] text-[#1E2022] shadow-md transition-transform group-hover:translate-x-1">
+                                <ArrowIcon />
+                            </span>
+                        </a>
+                    </div>
                 </div>
 
-                {/* Derecha — grilla de stats con divisor vertical */}
-                <div className="relative grid grid-cols-2 gap-x-10 gap-y-12 self-center sm:gap-x-16">
+                {/* 4. Derecha — Grilla de stats (Entrada desde la DERECHA - 300ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`relative grid grid-cols-2 gap-x-10 gap-y-12 self-center sm:gap-x-16 transition-all duration-1000 delay-300 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-x-0'
+                            : 'opacity-0 translate-x-12'
+                    }`}
+                >
                     {STATS.map((stat) => (
                         <div key={stat.label}>
                             <p className="font-jost text-4xl font-extrabold text-white lg:text-5xl">
@@ -135,6 +193,7 @@ export default function Metrics() {
                         <TickMarker className="absolute left-1/2 top-[80%] -translate-x-1/2 -translate-y-1/2" />
                     </div>
                 </div>
+
             </div>
         </section>
     );

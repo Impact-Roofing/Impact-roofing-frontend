@@ -1,23 +1,42 @@
-import Image from "next/image";
+'use client';
 
-// Puente visual entre Hero y Map. El wrapper mide 0 de alto en el flujo del
-// documento (no empuja a Map hacia abajo) — la imagen real va posicionada
-// "absolute" adentro, y "translateY(-50%)" la centra exactamente sobre la
-// costura entre ambas secciones.
-//
-// IMPORTANTE: "pointer-events-none" en ambos divs — este bloque es
-// puramente decorativo, pero como su altura crece con el ancho de pantalla
-// (aspect-[2/1] + w-full) y se superpone hacia arriba sobre el Hero, sin
-// esto su caja invisible bloqueaba los clics del botón "LET'S GET STARTED"
-// en pantallas anchas (mientras más ancha la pantalla, más alto el puente,
-// más tapaba el botón).
+import { useEffect, useRef, useState } from 'react';
+
 export default function HeroToMapBridge() {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [hasAnimated, setHasAnimated] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setHasAnimated(true);
+                    observer.disconnect(); // Se dispara una sola vez al entrar en pantalla
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className="pointer-events-none relative z-10 h-0 w-full">
-            {/* "IMPACT" — Subido más hacia arriba y con z-30 para asegurar que esté por encima del Hero */}
+        <div ref={containerRef} className="pointer-events-none relative z-10 h-0 w-full overflow-visible">
+            {/* "IMPACT" — Entrada única con desvanecido y desplazamiento de abajo hacia arriba */}
             <h2
                 aria-hidden
-                className="pointer-events-none absolute inset-x-0 top-0 -translate-y-[78%] select-none text-center font-jost text-[20vw] font-extrabold leading-none text-[#f5f5f5] lg:text-[13vw]"
+                style={{
+                    willChange: 'transform, opacity',
+                }}
+                className={`pointer-events-none absolute inset-x-0 top-0 select-none text-center font-jost text-[20vw] font-extrabold leading-none text-[#f5f5f5] lg:text-[13vw] transition-all duration-1000 ease-out ${
+                    hasAnimated
+                        ? 'opacity-100 translate-y-[-78%]'
+                        : 'opacity-100 translate-y-[-40%]'
+                }`}
             >
                 IMPACT
             </h2>

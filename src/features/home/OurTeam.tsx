@@ -1,15 +1,47 @@
+'use client';
+
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 const CHECKLIST_ITEMS = ["Free Quote", "Honest Pricing", "Certified Roofing Experts"];
 
 export default function OurTeam() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [hasAnimated, setHasAnimated] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    setHasAnimated(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.15 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [hasAnimated]);
+
     return (
         <section
+            ref={sectionRef}
             id="our-team"
             className="relative w-full overflow-hidden bg-white py-20 lg:py-28"
         >
-            {/* Header — dentro de un container contenido */}
-            <div className="relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-10">
+            {/* 1. Header (Entrada desde arriba - Tiempo 0ms) */}
+            <div
+                style={{ willChange: 'transform, opacity' }}
+                className={`relative z-10 mx-auto max-w-4xl px-6 text-center lg:px-10 transition-all duration-1000 ease-out ${
+                    hasAnimated
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 -translate-y-10'
+                }`}
+            >
                 <p className="text-sm font-bold leading-relaxed tracking-wide text-[#F2733A] lg:text-base">
                     EMERGENCY RESPONSE TEAM.
                     <br />
@@ -20,10 +52,18 @@ export default function OurTeam() {
                 </h2>
             </div>
 
-            {/* Foto + texto — mismo container contenido */}
+            {/* Foto + texto */}
             <div className="relative z-10 mx-auto mt-10 max-w-5xl px-6 lg:mt-14 lg:px-10">
-                {/* Foto con checklist superpuesto */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl sm:aspect-[16/10] lg:aspect-[16/9]">
+
+                {/* 2. Foto con checklist superpuesto (Entrada desde la IZQUIERDA - Retraso de 300ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`relative aspect-[4/3] w-full overflow-hidden rounded-3xl sm:aspect-[16/10] lg:aspect-[16/9] transition-all duration-1000 delay-300 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-x-0'
+                            : 'opacity-0 -translate-x-12'
+                    }`}
+                >
                     <Image
                         src="/assets/features/home/team/our-team-2.webp"
                         alt="Our roofing team"
@@ -45,8 +85,15 @@ export default function OurTeam() {
                     </div>
                 </div>
 
-                {/* Texto debajo de la foto */}
-                <div className="relative mt-6 max-w-md lg:mt-8">
+                {/* 3. Texto debajo de la foto (Entrada desde la DERECHA - Retraso de 600ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`relative mt-6 max-w-md lg:mt-8 transition-all duration-1000 delay-600 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-x-0'
+                            : 'opacity-0 translate-x-12'
+                    }`}
+                >
                     <p className="text-sm leading-relaxed text-[#0B2545] lg:text-base">
                         <span className="font-bold">
                             When storms or unexpected damage occur,

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type FormData = {
     fullName: string;
@@ -22,11 +22,32 @@ const initialFormData: FormData = {
 };
 
 export default function ContactUs() {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [hasAnimated, setHasAnimated] = useState(false);
+
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [errors, setErrors] = useState<FormErrors>({});
     const [isLoading, setIsLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    setHasAnimated(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.15 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [hasAnimated]);
 
     const handleInputChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -36,8 +57,6 @@ export default function ContactUs() {
         setErrors((prev) => ({ ...prev, [name]: undefined }));
     };
 
-    // Misma lógica de validación/sanitización que usabas en el otro
-    // proyecto, adaptada a los 5 campos de este form.
     const validateForm = (): FormData | null => {
         const sanitized: FormData = {
             fullName: formData.fullName.trim().replace(/<[^>]*>?/gm, ""),
@@ -95,7 +114,6 @@ export default function ContactUs() {
 
         setIsLoading(true);
         try {
-            // El API route espera { firstName, email, phone, address, message }
             const response = await fetch("/api/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -121,10 +139,18 @@ export default function ContactUs() {
     };
 
     return (
-        <section id="contact" className="w-full bg-white  py-20 lg:py-28">
+        <section ref={sectionRef} id="contact" className="w-full bg-white py-20 lg:py-28">
             <div className="mx-auto max-w-6xl px-6 lg:px-10">
-                {/* Fila 1 — texto, ancho completo, arriba de todo */}
-                <div className="max-w-2xl">
+
+                {/* 1. Fila 1 — Cabecera de texto (Entrada desde arriba - Tiempo 0ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`max-w-2xl transition-all duration-1000 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 -translate-y-10'
+                    }`}
+                >
                     <p className="text-sm font-bold tracking-[0.15em] text-[#F2733A]">
                         READY TO BEGIN?
                     </p>
@@ -142,8 +168,16 @@ export default function ContactUs() {
 
                 {/* Fila 2 — foto | form, dos columnas */}
                 <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
-                    {/* Izquierda — foto */}
-                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:aspect-auto lg:h-full">
+
+                    {/* 2. Izquierda — Foto (Entrada desde la IZQUIERDA - Retraso de 300ms) */}
+                    <div
+                        style={{ willChange: 'transform, opacity' }}
+                        className={`relative aspect-[4/3] w-full overflow-hidden rounded-2xl lg:aspect-auto lg:h-full transition-all duration-1000 delay-300 ease-out ${
+                            hasAnimated
+                                ? 'opacity-100 translate-x-0'
+                                : 'opacity-0 -translate-x-12'
+                        }`}
+                    >
                         <Image
                             src="/assets/features/home/contact/contact-roof.webp"
                             alt="Roofer working on a residential roof under a clear blue sky"
@@ -152,8 +186,15 @@ export default function ContactUs() {
                         />
                     </div>
 
-                    {/* Derecha — form */}
-                    <div>
+                    {/* 3. Derecha — Formulario (Entrada desde la DERECHA - Retraso de 600ms) */}
+                    <div
+                        style={{ willChange: 'transform, opacity' }}
+                        className={`transition-all duration-1000 delay-600 ease-out ${
+                            hasAnimated
+                                ? 'opacity-100 translate-x-0'
+                                : 'opacity-0 translate-x-12'
+                        }`}
+                    >
                         {submitted ? (
                             <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-[#0B2545]/10 bg-[#F7FAFC] px-8 py-16 text-center">
                                 <h3 className="font-jost text-2xl font-bold text-[#0B2545]">

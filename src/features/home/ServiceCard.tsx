@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -11,12 +11,6 @@ export type ServiceItem = {
     image: string;
 };
 
-// Card reutilizable para cada servicio. La imagen se revela con una
-// animación suave hacia arriba (translateY + opacity) apenas la card entra
-// en pantalla — se dispara UNA vez por card (con IntersectionObserver) y
-// de ahí en más es puramente una transición CSS, no un cálculo de scroll
-// frame por frame (más robusto, evita los bugs de timing que ya vimos con
-// ese enfoque en otras secciones).
 export default function ServiceCard({
                                         category,
                                         title,
@@ -25,7 +19,8 @@ export default function ServiceCard({
                                         image,
                                     }: ServiceItem) {
     const cardRef = useRef<HTMLDivElement>(null);
-    const [revealed, setRevealed] = useState(false);
+    const [cardVisible, setCardVisible] = useState(false);
+    const [contentVisible, setContentVisible] = useState(false);
 
     useEffect(() => {
         const card = cardRef.current;
@@ -34,11 +29,17 @@ export default function ServiceCard({
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    setRevealed(true);
+                    setCardVisible(true);
+                    // Disparamos la aparición escalonada del contenido interno
+                    const timer = setTimeout(() => {
+                        setContentVisible(true);
+                    }, 300);
+
                     observer.disconnect();
+                    return () => clearTimeout(timer);
                 }
             },
-            { threshold: 0.25 }
+            { threshold: 0.2 }
         );
 
         observer.observe(card);
@@ -48,14 +49,18 @@ export default function ServiceCard({
     return (
         <div
             ref={cardRef}
-            className="relative overflow-hidden shadow-md rounded-3xl"
+            className={`relative overflow-hidden shadow-md rounded-3xl transition-all duration-500 ease-out ${
+                cardVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-8"
+            }`}
             style={{
                 background: "linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 65%, #EDEDED 100%)",
                 WebkitBackdropFilter: "blur(16px)",
                 boxShadow: "0 5px 15px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
             }}
         >
-            {/* Franja navy ondulada — igual técnica que la naranja de Metrics.tsx */}
+            {/* Franja navy ondulada */}
             <div className="absolute inset-x-0 top-0 z-10 leading-none">
                 <svg
                     viewBox="0 0 1493 49"
@@ -71,18 +76,43 @@ export default function ServiceCard({
             </div>
 
             <div className="grid grid-cols-1 items-stretch lg:grid-cols-[42%_58%] lg:gap-10">
-                {/* Izquierda — texto */}
+                {/* Izquierda — texto con orden secuencial */}
                 <div className="px-8 pb-8 pt-16 lg:px-12 lg:pb-10 lg:pt-20">
-                    <p className="text-sm font-bold tracking-[0.15em] text-[#F2733A]">
-                        {category}
-                    </p>
-                    <h3 className="mt-2 font-jost text-3xl font-extrabold leading-tight text-[#0B2545] lg:text-4xl">
-                        {title}
-                    </h3>
-                    <p className="mt-3 max-w-md text-sm leading-relaxed text-[#0B2545]/70 lg:text-base">
+                    {/* Paso A: Categoría y Título */}
+                    <div
+                        className={`transition-all duration-700 ease-out ${
+                            contentVisible
+                                ? "opacity-100 translate-y-0"
+                                : "opacity-0 translate-y-6"
+                        }`}
+                    >
+                        <p className="text-sm font-bold tracking-[0.15em] text-[#F2733A]">
+                            {category}
+                        </p>
+                        <h3 className="mt-2 font-jost text-3xl font-extrabold leading-tight text-[#0B2545] lg:text-4xl">
+                            {title}
+                        </h3>
+                    </div>
+
+                    {/* Paso B: Descripción */}
+                    <p
+                        className={`mt-3 max-w-md text-sm leading-relaxed text-[#0B2545]/70 lg:text-base transition-all duration-700 delay-200 ease-out ${
+                            contentVisible
+                                ? "opacity-100 translate-y-0"
+                                : "opacity-0 translate-y-6"
+                        }`}
+                    >
                         {description}
                     </p>
-                    <ul className="mt-5 flex flex-col gap-3">
+
+                    {/* Paso C: Lista de puntos */}
+                    <ul
+                        className={`mt-5 flex flex-col gap-3 transition-all duration-700 delay-400 ease-out ${
+                            contentVisible
+                                ? "opacity-100 translate-y-0"
+                                : "opacity-0 translate-y-6"
+                        }`}
+                    >
                         {points.map((point) => (
                             <li key={point} className="flex items-center gap-3">
                                 <ArrowBulletIcon />
@@ -94,16 +124,12 @@ export default function ServiceCard({
                     </ul>
                 </div>
 
-                {/* Derecha — imagen, con reveal animado. El contenedor llena
-                    exactamente su celda del grid (w-full h-full, sin
-                    aspect-ratio propio) — así nunca calcula un ancho mayor
-                    al disponible y se desborda de la card. object-cover
-                    centra y recorta la imagen dentro de esa caja real. */}
+                {/* Derecha — Imagen con movimiento suave desde el inicio, sin opacidad y mayor duración */}
                 <div
-                    className={`relative aspect-[3/2] w-full min-h-[240px] overflow-hidden transition-all duration-1900 ease-out lg:aspect-auto lg:h-full ${
-                        revealed
-                            ? "translate-y-0 opacity-100"
-                            : "translate-y-14 opacity-0"
+                    className={`relative aspect-[3/2] w-full min-h-[240px] overflow-hidden transition-all duration-1000 ease-out lg:aspect-auto lg:h-full ${
+                        cardVisible
+                            ? "translate-y-0"
+                            : "translate-y-39"
                     }`}
                 >
                     <Image
