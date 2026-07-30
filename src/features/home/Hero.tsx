@@ -16,7 +16,7 @@ export default function Hero() {
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && !isLoaded) {
                     setIsLoaded(true);
                     observer.disconnect();
                 }
@@ -29,7 +29,7 @@ export default function Hero() {
         }
 
         return () => observer.disconnect();
-    }, []);
+    }, [isLoaded]);
 
     return (
         <section
@@ -49,52 +49,83 @@ export default function Hero() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#0B2545]/65 via-[#0B2545]/30 to-transparent" />
 
             <div className="relative z-10 mx-auto w-full max-w-[1500px] px-6 lg:px-16">
-                {/* Contenedor del texto con animación de izquierda a derecha (slideX + fade) */}
-                <div
-                    style={{ willChange: 'transform, opacity' }}
-                    className={`max-w-xl transition-all duration-1000 ease-out ${
-                        isLoaded
-                            ? 'opacity-100 translate-x-0'
-                            : 'opacity-0 -translate-x-12'
-                    }`}
-                >
-                    <h1 className="text-5xl font-jost font-medium text-white lg:text-7xl lg:-mt-40">
-                        The Easiest way to
-                        <br />
-                        <span className="text-[#011C2D]">Buy a Roof</span>
-                    </h1>
+                <div className="max-w-xl">
 
-                    <p className="mt-6 max-w-lg text-lg leading-relaxed text-white">
-                        From storm damage to full roof replacements, we provide honest guidance, expert craftsmanship, and a seamless experience.
-                    </p>
-                    <a
-                        href="#contact"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            document
-                                .getElementById("contact")
-                                ?.scrollIntoView({ behavior: "smooth" });
-                            history.pushState(null, "", "#contact");
-                        }}
-                        className="group relative z-[999] mt-8 inline-flex items-center gap-6 rounded-full py-3 pl-8 pr-2 text-lg font-bold tracking-wide text-white transition-all hover:scale-[1.03]"
-                        style={{
-                            background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%)",
-                            backdropFilter: "blur(16px)",
-                            WebkitBackdropFilter: "blur(16px)",
-                            boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
-                            border: "1px solid rgba(255, 255, 255, 0.25)",
-                        }}
+                    {/* 1. Título principal (Entrada desde la IZQUIERDA - 0ms) */}
+                    <div
+                        style={{ willChange: 'transform, opacity' }}
+                        className={`transition-all duration-1000 ease-out ${
+                            isLoaded
+                                ? 'opacity-100 translate-x-0'
+                                : 'opacity-0 -translate-x-12'
+                        }`}
                     >
-                        LET&apos;S GET STARTED
-                        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FF6E1F] text-white shadow-md transition-transform group-hover:translate-x-1">
-                            <ArrowIcon />
-                        </span>
-                    </a>
+                        <h1 className="text-5xl font-jost font-medium text-white lg:text-7xl lg:-mt-40">
+                            The Easiest way to
+                            <br />
+                            <span className="text-[#011C2D]">Buy a Roof</span>
+                        </h1>
+                    </div>
+
+                    {/* 2. Párrafo descriptivo (Entrada desde la IZQUIERDA - Retraso de 200ms) */}
+                    <div
+                        style={{ willChange: 'transform, opacity' }}
+                        className={`transition-all duration-1000 delay-200 ease-out ${
+                            isLoaded
+                                ? 'opacity-100 translate-x-0'
+                                : 'opacity-0 -translate-x-12'
+                        }`}
+                    >
+                        <p className="mt-6 max-w-lg text-lg leading-relaxed text-white">
+                            From storm damage to full roof replacements, we provide honest guidance, expert craftsmanship, and a seamless experience.
+                        </p>
+                    </div>
+
+                    {/* 3. Botón CTA (Entrada desde abajo - Retraso de 400ms) */}
+                    <div
+                        style={{ willChange: 'transform, opacity' }}
+                        className={`transition-all duration-1000 delay-400 ease-out ${
+                            isLoaded
+                                ? 'opacity-100 translate-y-0'
+                                : 'opacity-0 translate-y-8'
+                        }`}
+                    >
+                        <a
+                            href="#contact"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                document
+                                    .getElementById("contact")
+                                    ?.scrollIntoView({ behavior: "smooth" });
+                                history.pushState(null, "", "#contact");
+                            }}
+                            className="group relative z-[999] mt-8 inline-flex items-center gap-6 rounded-full py-3 pl-8 pr-2 text-lg font-bold tracking-wide text-white transition-all hover:scale-[1.03]"
+                            style={{
+                                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%)",
+                                backdropFilter: "blur(16px)",
+                                WebkitBackdropFilter: "blur(16px)",
+                                boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+                                border: "1px solid rgba(255, 255, 255, 0.25)",
+                            }}
+                        >
+                            LET&apos;S GET STARTED
+                            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FF6E1F] text-white shadow-md transition-transform group-hover:translate-x-1">
+                                <ArrowIcon />
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            {/* Badge "100% Happy customers" — esquina inferior derecha */}
-            <div className="hidden lg:flex absolute bottom-4 right-6 z-20 lg:bottom-60 lg:right-20">
+            {/* 4. Badge "100% Happy customers" (Entrada desde la DERECHA - Retraso de 500ms) */}
+            <div
+                style={{ willChange: 'transform, opacity' }}
+                className={`hidden lg:flex absolute bottom-4 right-6 z-20 lg:bottom-60 lg:right-20 transition-all duration-1000 delay-500 ease-out ${
+                    isLoaded
+                        ? 'opacity-100 translate-x-0'
+                        : 'opacity-0 translate-x-16'
+                }`}
+            >
                 <div
                     className="relative overflow-visible flex items-center gap-4 rounded-full border border-white/40 py-3 pl-3 pr-8 lg:gap-6 lg:py-2 lg:pl-5 lg:pr-12 shadow-2xl"
                     style={{
