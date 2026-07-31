@@ -53,7 +53,7 @@ export default function OurTeam() {
             </div>
 
             {/* Foto + texto */}
-            <div className="relative z-10 mx-auto mt-10 max-w-5xl px-6 lg:mt-14 lg:px-10">
+            <div className="relative z-10 mx-auto mt-10 max-w-6xl px-6 lg:mt-14 lg:px-10">
 
                 {/* 2. Foto con checklist superpuesto (Entrada desde la IZQUIERDA - Retraso de 300ms) */}
                 <div
