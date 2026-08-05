@@ -40,6 +40,18 @@ const SERVICES: ServiceItem[] = [
         image: "/assets/features/home/services/gutter.webp",
     },
     {
+        category: "SOLAR ENERGY",
+        title: "Solar Panel Installation",
+        description:
+            "Integrate state-of-the-art solar solutions with your roofing system to maximize energy efficiency and reduce utility costs.",
+        points: [
+            "Clean, reliable power built to last",
+            "Seamless integration with your roof",
+            "Lower long-term energy bills",
+        ],
+        image: "/assets/features/home/services/solar-panel.webp",
+    },
+    {
         category: "LADDER ASSIST",
         title: "Expert Ladder Assistance",
         description:
