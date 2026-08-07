@@ -94,7 +94,7 @@ export default function Marketplace() {
                         }`}
                     >
                         <div
-                            className="flex h-full flex-col gap-8 px-8 py-10"
+                            className="flex h-full flex-col gap-8 px-8 py-8"
                             style={{
                                 background:
                                     "linear-gradient(160deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05))",

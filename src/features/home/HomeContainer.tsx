@@ -8,6 +8,7 @@ import Metrics from "@/features/home/metrics";
 import Services from "@/features/home/services";
 import OurTeam from "@/features/home/OurTeam";
 import SVGBridge from "@/features/home/SVGBridge";
+import OurMission from "@/features/home/OurMission";
 
 export default function HomeContainer() {
     return (
@@ -20,6 +21,7 @@ export default function HomeContainer() {
             <Marketplace/>
             <OurTeam/>
             <SVGBridge/>
+            <OurMission/>
             <ContactUs/>
         </main>
     );
