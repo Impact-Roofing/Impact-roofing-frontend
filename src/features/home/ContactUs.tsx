@@ -319,11 +319,11 @@ export default function ContactUs() {
                                 </button>
 
                                 <a
-                                    href="tel:+12244264773"
+                                    href="tel:+13127303543"
                                     className="mx-auto mt-1 flex items-center gap-2 rounded-full border border-[#0B2545]/30 px-6 py-2.5 text-sm text-[#0B2545]"
                                 >
                                     Or call us{" "}
-                                    <span className="font-bold">224-426-4773</span>
+                                    <span className="font-bold">312-730-3543</span>
                                 </a>
                             </form>
                         )}

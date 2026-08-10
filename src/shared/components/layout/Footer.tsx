@@ -71,9 +71,9 @@ export default function Footer() {
                             Get In Touch
                         </h3>
                         <p className="mt-4 text-sm leading-relaxed text-[#0B2545]/80">
-                            4521 W Lawrence Ave
+                            403 dorchester ct
                             <br />
-                            Chicago, IL 60630
+                            Roselle 60016
                         </p>
                         <p className="mt-4 text-sm leading-relaxed text-[#0B2545]/80">
                             <a
@@ -83,8 +83,8 @@ export default function Footer() {
                                 info@impactroofing.com
                             </a>
                             <br />
-                            <a href="tel:+17735550192" className="hover:text-[#001321]">
-                                (773) 555-0192
+                            <a href="tel:+13127303543" className="hover:text-[#001321]">
+                                312-730-3543
                             </a>
                         </p>
                     </div>
