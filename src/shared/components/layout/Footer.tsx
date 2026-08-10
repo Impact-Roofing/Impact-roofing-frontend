@@ -8,6 +8,7 @@ const NAVIGATE_LINKS = [
     { label: "About", href: "#about" },
     { label: "Services", href: "#services" },
     { label: "How It Works", href: "#how-it-works" },
+    { label: "Insurance", href: "#insurance-adjusters" },
     { label: "Our Team", href: "#our-team" },
 ];
 
