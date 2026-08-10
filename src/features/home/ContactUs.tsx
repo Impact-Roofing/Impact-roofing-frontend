@@ -179,7 +179,7 @@ export default function ContactUs() {
                         }`}
                     >
                         <Image
-                            src="/assets/features/home/contact/contact-roof.webp"
+                            src="/assets/features/home/contact/contact-roof-alt.webp"
                             alt="Roofer working on a residential roof under a clear blue sky"
                             fill
                             className="object-cover"

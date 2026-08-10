@@ -9,6 +9,7 @@ import Services from "@/features/home/services";
 import OurTeam from "@/features/home/OurTeam";
 import SVGBridge from "@/features/home/SVGBridge";
 import OurMission from "@/features/home/OurMission";
+import InsuranceAdjusters from "@/features/home/Insuranceadjusters";
 
 export default function HomeContainer() {
     return (
@@ -19,6 +20,7 @@ export default function HomeContainer() {
             <Metrics/>
             <Services/>
             <Marketplace/>
+            <InsuranceAdjusters/>
             <OurTeam/>
             <SVGBridge/>
             <OurMission/>

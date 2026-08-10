@@ -1,3 +1,7 @@
+'use client';
+
+import { useEffect, useRef, useState } from "react";
+
 const VALUES = [
     {
         number: "01",
@@ -44,27 +48,89 @@ const VALUES = [
 ];
 
 export default function OurMission() {
-    return (
-        <section id="our-mission" className="w-full bg-[#FFFFFF] py-20 lg:py-28">
-            <div className="mx-auto max-w-6xl px-6 text-center lg:px-10">
-                <p className="text-sm font-bold tracking-[0.15em] text-[#F2733A]">
-                    OUR MISSION
-                </p>
-                <h2 className="mt-3 font-jost text-4xl font-extrabold leading-tight text-[#0B2545] lg:text-5xl">
-                    Honest Work, Every Roof,
-                    <br />
-                    Every Time.
-                </h2>
-                <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#0B2545]/60">
-                    The standards we hold ourselves to on every inspection,
-                    every claim, and every roof we touch.
-                </p>
+    const sectionRef = useRef<HTMLElement>(null);
+    const [hasAnimated, setHasAnimated] = useState(false);
 
-                <div className="mt-14 grid grid-cols-1 gap-6 text-left sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    setHasAnimated(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.1 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [hasAnimated]);
+
+    return (
+        <section ref={sectionRef} id="our-mission" className="w-full bg-[#FFFFFF] py-20 lg:py-28 overflow-hidden">
+            <div className="mx-auto max-w-6xl px-6 text-center lg:px-10">
+
+                {/* 1. Etiqueta superior (Entrada desde ARRIBA - 0ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`transition-all duration-1000 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 -translate-y-6'
+                    }`}
+                >
+                    <p className="text-sm font-bold tracking-[0.15em] text-[#F2733A]">
+                        OUR MISSION
+                    </p>
+                </div>
+
+                {/* 2. Título principal (Entrada desde ARRIBA - Retraso de 200ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`transition-all duration-1000 delay-200 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 -translate-y-8'
+                    }`}
+                >
+                    <h2 className="mt-3 font-jost text-4xl font-extrabold leading-tight text-[#0B2545] lg:text-5xl">
+                        Honest Work, Every Roof,
+                        <br />
+                        Every Time.
+                    </h2>
+                </div>
+
+                {/* 3. Párrafo descriptivo (Entrada desde ABAJO - Retraso de 400ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`transition-all duration-1000 delay-400 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-8'
+                    }`}
+                >
+                    <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#0B2545]/60">
+                        The standards we hold ourselves to on every inspection,
+                        every claim, and every roof we touch.
+                    </p>
+                </div>
+
+                {/* 4. Grid de tarjetas con aparición escalonada (Entrada desde ABAJO - Retraso de 600ms) */}
+                <div
+                    style={{ willChange: 'transform, opacity' }}
+                    className={`mt-14 grid grid-cols-1 gap-6 text-left sm:grid-cols-2 lg:grid-cols-3 lg:gap-8 transition-all duration-1000 delay-600 ease-out ${
+                        hasAnimated
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-12'
+                    }`}
+                >
                     {VALUES.map((value) => (
                         <div
                             key={value.number}
-                            className="relative overflow-hidden rounded-2xl border border-[#0B2545]/5 bg-white p-6 shadow-sm"
+                            className="relative overflow-hidden rounded-2xl border border-[#0B2545]/5 bg-white p-6 shadow-sm transition-transform hover:-translate-y-1 duration-300"
                         >
                             <span className="absolute right-5 top-3 font-jost text-5xl font-extrabold text-[#F2733A]/10">
                                 {value.number}
@@ -83,6 +149,7 @@ export default function OurMission() {
                         </div>
                     ))}
                 </div>
+
             </div>
         </section>
     );
