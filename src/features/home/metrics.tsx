@@ -71,7 +71,7 @@ export default function Metrics() {
                 {/* 1. Izquierda — Copy + Título + Párrafo (Entrada desde la IZQUIERDA - 0ms) */}
                 <div
                     style={{ willChange: 'transform, opacity' }}
-                    className={`transition-all duration-1000 ease-out ${
+                    className={`text-center lg:text-left transition-all duration-1000 ease-out ${
                         hasAnimated
                             ? 'opacity-100 translate-x-0'
                             : 'opacity-0 -translate-x-12'
@@ -85,7 +85,7 @@ export default function Metrics() {
                         <br />
                         Different
                     </h2>
-                    <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
+                    <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/70 lg:mx-0">
                         We combine expert craftsmanship, premium materials, and
                         reliable service to deliver roofing solutions built for
                         lasting performance. From detailed inspections to complete
@@ -104,7 +104,7 @@ export default function Metrics() {
                         }`}
                     >
                         {/* Barra 1 — Precision & Craftsmanship, 100% */}
-                        <div className="mt-8 max-w-md">
+                        <div className="mx-auto mt-8 max-w-md lg:mx-0">
                             <div className="flex items-center justify-between">
                                 <span className="text-sm font-semibold text-[#F2733A]">
                                     Precision &amp; Craftsmanship
@@ -119,7 +119,7 @@ export default function Metrics() {
                         </div>
 
                         {/* Barra 2 — Unresolved Issues, 0% */}
-                        <div className="mt-5 max-w-md">
+                        <div className="mx-auto mt-5 max-w-md lg:mx-0">
                             <div className="flex items-center justify-between">
                                 <span className="text-sm font-semibold text-white">
                                     Unresolved Issues
@@ -132,10 +132,12 @@ export default function Metrics() {
                         </div>
                     </div>
 
-                    {/* 3. CTA (Entrada desde abajo con retraso - 400ms) */}
+                    {/* 3. CTA (Entrada desde abajo con retraso - 400ms).
+                        Centrado en mobile (flex justify-center), alineado a
+                        la izquierda desde lg: (como el resto de la columna). */}
                     <div
                         style={{ willChange: 'transform, opacity' }}
-                        className={`transition-all duration-1000 delay-400 ease-out ${
+                        className={`flex justify-center lg:justify-start transition-all duration-1000 delay-400 ease-out ${
                             hasAnimated
                                 ? 'opacity-100 translate-y-0'
                                 : 'opacity-0 translate-y-8'
@@ -167,10 +169,11 @@ export default function Metrics() {
                     </div>
                 </div>
 
-                {/* 4. Derecha — Grilla de stats (Entrada desde la DERECHA - 300ms) */}
+                {/* 4. Derecha — Grilla de stats (Entrada desde la DERECHA - 300ms).
+                    Texto centrado en mobile, alineado a la izquierda desde lg:. */}
                 <div
                     style={{ willChange: 'transform, opacity' }}
-                    className={`relative grid grid-cols-2 gap-x-10 gap-y-12 self-center sm:gap-x-16 transition-all duration-1000 delay-300 ease-out ${
+                    className={`relative grid grid-cols-2 gap-x-10 gap-y-12 self-center text-center sm:gap-x-16 lg:text-left transition-all duration-1000 delay-300 ease-out ${
                         hasAnimated
                             ? 'opacity-100 translate-x-0'
                             : 'opacity-0 translate-x-12'
