@@ -1,18 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
-// Mismas anclas que el nav del header — <a> nativa, no next/link, por el
-// mismo motivo (evitar que los hashes se apilen en la URL en vez de
-// reemplazarse).
+// href absoluto ("/#about" en vez de "#about") — mismo motivo que en el
+// Header: funciona desde cualquier página, no solo desde la home.
 const NAVIGATE_LINKS = [
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "How It Works", href: "#how-it-works" },
-    { label: "Insurance", href: "#insurance-adjusters" },
-    { label: "Our Team", href: "#our-team" },
+    { label: "About", href: "/#about" },
+    { label: "Services", href: "/#services" },
+    { label: "How It Works", href: "/#how-it-works" },
+    { label: "Insurance", href: "/#insurance-adjusters" },
+    { label: "Our Team", href: "/#our-team" },
 ];
 
-const COMPANY_LINKS = [{ label: "Contact", href: "#contact" }];
+const COMPANY_LINKS = [{ label: "Contact", href: "/#contact" }];
 
 export default function Footer() {
     const year = new Date().getFullYear();
@@ -145,7 +144,7 @@ function LinkedInIcon() {
 
 function FacebookIcon() {
     return (
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"> {/* FORZAMOS BLANCO AQUÍ */}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
             <path d="M14 8.5h2V5.5h-2c-2.2 0-4 1.8-4 4V12H8v3h2v6h3v-6h2.2l.8-3H13v-2.2c0-.7.3-1.3 1-1.3Z" />
         </svg>
     );

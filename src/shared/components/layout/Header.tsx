@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 type NavLink = {
@@ -9,28 +10,36 @@ type NavLink = {
     href: string;
 };
 
-// Ahora es una landing de una sola página: cada link apunta a un "id" de
-// una sección real dentro de HomeContainer. Como son saltos DENTRO de la
-// misma página, usamos <a> nativa (no next/link) — con next/link, cada
-// clic empujaba un hash nuevo al que ya estaba en la URL en vez de
-// reemplazarlo (ej. "#how-it-works#solutions"). <a href="#id"> siempre
-// reemplaza el hash actual, nunca lo apila.
-//
-// Nota: "FAQ" apuntaba a "/#site-footer" (el id del footer, no el de la
-// sección FAQ) — lo corregí a "#faq", que es el id real de esa sección.
+// href absoluto ("/#about" en vez de "#about") — así el link siempre
+// apunta a la home + esa sección, sin importar en qué página estés. Con
+// un href relativo tipo "#about", el navegador lo pega al path ACTUAL
+// (ej. en /privacy-policy terminaba en /privacy-policy#about en vez de ir
+// a la home). En la home esto sigue funcionando como scroll normal sin
+// recargar la página, porque el path coincide.
 const NAV_LINKS: NavLink[] = [
-    { label: "About", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "How it works", href: "#how-it-works" },
-    { label: "Insurance", href: "#insurance-adjusters" },
-    { label: "Our team", href: "#our-team" },
+    { label: "About", href: "/#about" },
+    { label: "Services", href: "/#services" },
+    { label: "How it works", href: "/#how-it-works" },
+    { label: "Insurance", href: "/#insurance-adjusters" },
+    { label: "Our team", href: "/#our-team" },
 ];
+
+// Páginas donde el header necesita fondo sólido en vez de quedar
+// transparente sobre la foto del Hero — ahí el texto blanco se pierde
+// sobre el fondo blanco de estas páginas legales.
+const SOLID_BG_ON = ["/privacy-policy", "/terms-of-service"];
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const pathname = usePathname();
+    const needsSolidBg = SOLID_BG_ON.includes(pathname);
 
     return (
-        <header className="absolute top-0 left-0 z-50 w-full">
+        <header
+            className={`absolute top-0 left-0 z-50 w-full ${
+                needsSolidBg ? "bg-[#FF6E1F]" : ""
+            }`}
+        >
             <div className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-6 lg:px-10">
                 {/* Logo — navegación real a otra ruta, se queda con next/link */}
                 <Link href="/" className="relative h-20 w-44 shrink-0 lg:h-24 lg:w-52">
@@ -57,9 +66,8 @@ export default function Header() {
                 </nav>
 
                 {/* CTA — ancla a #contact, <a> nativa */}
-                {/* CTA — ancla a #contact, <a> nativa */}
                 <a
-                    href="#contact"
+                    href="/#contact"
                     className="group hidden items-center gap-6 rounded-full py-2.5 pl-8 pr-2.5 text-sm font-bold tracking-wider text-white shadow-md transition-all hover:scale-[1.03] lg:flex"
                     style={{
                         background: "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%)",
@@ -110,7 +118,7 @@ export default function Header() {
                             </a>
                         ))}
                         <a
-                            href="#contact"
+                            href="/#contact"
                             onClick={() => setIsMenuOpen(false)}
                             className="group mt-3 flex items-center justify-between rounded-full py-2.5 pl-8 pr-2 text-sm font-bold tracking-wider text-white shadow-lg transition-all hover:scale-[1.03]"
                             style={{
