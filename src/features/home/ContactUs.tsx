@@ -3,7 +3,16 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
+const REQUEST_TYPES = [
+    { value: "inspection", label: "Free roof inspection", cta: "FREE INSPECTION" },
+    { value: "service-call", label: "Small repair / service call", cta: "REQUEST A SERVICE CALL" },
+    { value: "partnership", label: "Contractor or insurance partnership", cta: "SEND MESSAGE" },
+] as const;
+
+type RequestType = (typeof REQUEST_TYPES)[number]["value"];
+
 type FormData = {
+    requestType: RequestType;
     fullName: string;
     phone: string;
     email: string;
@@ -14,6 +23,7 @@ type FormData = {
 type FormErrors = Partial<Record<keyof FormData, string>>;
 
 const initialFormData: FormData = {
+    requestType: "inspection",
     fullName: "",
     phone: "",
     email: "",
@@ -30,6 +40,11 @@ export default function ContactUs() {
     const [isLoading, setIsLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
+
+    const addressRequired = formData.requestType !== "partnership";
+    const submitLabel =
+        REQUEST_TYPES.find((t) => t.value === formData.requestType)?.cta ??
+        "SEND REQUEST";
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -49,8 +64,23 @@ export default function ContactUs() {
         return () => observer.disconnect();
     }, [hasAnimated]);
 
+    // Otras secciones (ej. contractorPartners) disparan este evento para que
+    // el formulario abra ya con el tipo de solicitud correcto.
+    useEffect(() => {
+        const handler = (e: Event) => {
+            const type = (e as CustomEvent<RequestType>).detail;
+            if (REQUEST_TYPES.some((t) => t.value === type)) {
+                setFormData((prev) => ({ ...prev, requestType: type }));
+            }
+        };
+        window.addEventListener("contact:preselect", handler);
+        return () => window.removeEventListener("contact:preselect", handler);
+    }, []);
+
     const handleInputChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+        e: React.ChangeEvent<
+            HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+        >
     ) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
@@ -59,6 +89,7 @@ export default function ContactUs() {
 
     const validateForm = (): FormData | null => {
         const sanitized: FormData = {
+            requestType: formData.requestType,
             fullName: formData.fullName.trim().replace(/<[^>]*>?/gm, ""),
             phone: formData.phone.trim(),
             email: formData.email.trim(),
@@ -91,7 +122,9 @@ export default function ContactUs() {
             newErrors.email = "Please enter a valid email address.";
         }
 
-        if (!sanitized.address) {
+        // La dirección es obligatoria para inspecciones y service calls; para
+        // contratistas/aseguradoras es opcional.
+        if (!sanitized.address && addressRequired) {
             newErrors.address = "Address is required.";
         } else if (sanitized.address.length > 120) {
             newErrors.address = "Address is too long (max 120 characters).";
@@ -118,6 +151,7 @@ export default function ContactUs() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
+                    requestType: cleanData.requestType,
                     firstName: cleanData.fullName,
                     email: cleanData.email,
                     phone: cleanData.phone,
@@ -202,12 +236,27 @@ export default function ContactUs() {
                                 </h3>
                                 <p className="mt-2 max-w-sm text-sm text-[#0B2545]/70">
                                     We received your request — our team will reach
-                                    out shortly to schedule your free roof
-                                    assessment.
+                                    out shortly.
                                 </p>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                                <FormField id="requestType" label="What do you need?">
+                                    <select
+                                        id="requestType"
+                                        name="requestType"
+                                        value={formData.requestType}
+                                        onChange={handleInputChange}
+                                        className={`${inputClasses(false)} cursor-pointer`}
+                                    >
+                                        {REQUEST_TYPES.map((type) => (
+                                            <option key={type.value} value={type.value}>
+                                                {type.label}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </FormField>
+
                                 <FormField
                                     id="fullName"
                                     label="Full name"
@@ -259,8 +308,8 @@ export default function ContactUs() {
 
                                 <FormField
                                     id="address"
-                                    label="Address"
-                                    required
+                                    label={addressRequired ? "Address" : "Company or job address (optional)"}
+                                    required={addressRequired}
                                     error={errors.address}
                                 >
                                     <input
@@ -314,7 +363,7 @@ export default function ContactUs() {
                                             />
                                         </svg>
                                     ) : (
-                                        "FREE INSPECTION"
+                                        submitLabel
                                     )}
                                 </button>
 

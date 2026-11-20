@@ -10,6 +10,7 @@ import OurTeam from "@/features/home/OurTeam";
 import SVGBridge from "@/features/home/SVGBridge";
 import OurMission from "@/features/home/OurMission";
 import InsuranceAdjusters from "@/features/home/Insuranceadjusters";
+import ContractorPartners from "../../../public/assets/features/home/contractorPartners/ContractorPartners";
 
 export default function HomeContainer() {
     return (
@@ -21,6 +22,7 @@ export default function HomeContainer() {
             <Services/>
             <Marketplace/>
             <InsuranceAdjusters/>
+            <ContractorPartners/>
             <OurTeam/>
             <SVGBridge/>
             <OurMission/>

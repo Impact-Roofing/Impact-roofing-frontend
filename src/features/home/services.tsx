@@ -5,12 +5,12 @@ import ServiceCard, { ServiceItem } from "./ServiceCard";
 const SERVICES: ServiceItem[] = [
     {
         category: "ROOFING",
-        title: "Complete Roof Replacement",
+        title: "Roof Replacement & Repairs",
         description:
-            "Upgrade your home with a brand-new roofing system built for superior durability, weather resistance, and long-term performance.",
+            "From full replacements to small repairs, we deliver roofing built for durability, weather resistance, and long-term performance.",
         points: [
             "Premium roofing materials",
-            "Expert installation from start to finish",
+            "Small repairs and service calls, no job too small",
             "Built to protect for decades",
         ],
         image: "/assets/features/home/services/roofing.webp",
@@ -71,9 +71,7 @@ export default function Services() {
             id="services"
             className="relative w-full overflow-hidden bg-white py-20 lg:py-28"
         >
-            {/* Figura naranja decorativa — detrás del header (z-0), misma
-                técnica/forma que usamos en OurTeam.tsx. Mucho más grande
-                ahora, ocupando toda la esquina superior izquierda. */}
+            {/* Figura naranja decorativa — detrás del header (z-0) */}
             <div className="pointer-events-none absolute -left-70 -top-8 z-0 w-[145%] sm:-left-160 sm:-top-32 sm:w-[150%] lg:-left-340 lg:-top-60 lg:w-[155%]">
                 <svg
                     viewBox="0 0 1300 550"
@@ -109,8 +107,12 @@ export default function Services() {
                     <h2 className="mt-3 font-jost text-3xl font-extrabold leading-tight text-[#0B2545] lg:text-5xl">
                         Everything Your Roof Needs
                     </h2>
-                    <p className="mt-3 text-lg font-bold text-[#0B2545] lg:text-xl">
-                        subcontracted / sub-contractor
+                    <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#0B2545]/70 lg:text-lg">
+                        We take on the roofing repairs and small jobs that larger
+                        contractors don&apos;t have time for. Homeowners, insurance
+                        companies and general contractors call us to fix problems
+                        quickly and correctly, including work that was left
+                        unfinished or done poorly the first time.
                     </p>
                 </div>
 
@@ -139,8 +141,8 @@ export default function Services() {
                     >
                         LET&apos;S GET STARTED
                         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#FF6E1F] text-white shadow-md transition-transform group-hover:translate-x-1">
-            <ArrowIcon />
-        </span>
+                            <ArrowIcon />
+                        </span>
                     </a>
                 </div>
             </div>

@@ -77,7 +77,7 @@ export default function Hero() {
                         }`}
                     >
                         <p className="mt-6 max-w-lg text-lg leading-relaxed text-white">
-                            From storm damage to full roof replacements, we provide honest guidance, expert craftsmanship, and a seamless experience.
+                            Small roofing jobs, done right, for homeowners, insurers and contractors.
                         </p>
                     </div>
 

@@ -22,7 +22,7 @@ const montserrat = Montserrat({
 });
 
 // TODO: reemplazar por el dominio real una vez esté definido/deployado.
-const SITE_URL = "https://www.impactroofing.com";
+const SITE_URL = "https://www.impactroofingteam.com";
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
@@ -32,13 +32,18 @@ export const metadata: Metadata = {
     // sigue este patrón). Si una página no define título propio, usa el
     // "default" de acá.
     title: {
-        default: "Impact Roofing | Roofing, Siding & Gutters in Chicago, IL",
+        default: "Impact Roofing | Roof Repairs, Replacement & Siding in Chicago, IL",
         template: "%s | Impact Roofing",
     },
     description:
-        "Impact Roofing provides honest, expert roof replacement, siding, gutter, and storm damage repair services in Chicago and the surrounding suburbs. Free inspections, certified crews, and 20+ years of experience.",
+        "Impact Roofing handles roof repairs, small service calls, full replacements, siding, and gutters in Chicago and the surrounding suburbs. Free inspections, certified crews, and 20+ years of experience.",
     keywords: [
         "roofing Chicago",
+        "roof repair Chicago",
+        "small roofing repairs",
+        "roofing service calls",
+        "shingle repair",
+        "roofing subcontractor Chicago",
         "roof replacement Chicago",
         "roof repair Illinois",
         "storm damage roof repair",
@@ -63,9 +68,9 @@ export const metadata: Metadata = {
         locale: "en_US",
         url: SITE_URL,
         siteName: "Impact Roofing",
-        title: "Impact Roofing | Roofing, Siding & Gutters in Chicago, IL",
+        title: "Impact Roofing | Roof Repairs, Replacement & Siding in Chicago, IL",
         description:
-            "Honest, expert roofing services in Chicago and the surrounding suburbs. Free inspections, certified crews, and 20+ years of experience.",
+            "Small roofing jobs, done right, for homeowners, insurers and contractors. Free inspections, certified crews, and 20+ years of experience.",
         images: [
             {
                 // TODO: reemplazar por una imagen real de 1200x630px (formato
@@ -80,9 +85,9 @@ export const metadata: Metadata = {
 
     twitter: {
         card: "summary_large_image",
-        title: "Impact Roofing | Roofing, Siding & Gutters in Chicago, IL",
+        title: "Impact Roofing | Roof Repairs, Replacement & Siding in Chicago, IL",
         description:
-            "Honest, expert roofing services in Chicago and the surrounding suburbs. Free inspections, certified crews, and 20+ years of experience.",
+            "Small roofing jobs, done right, for homeowners, insurers and contractors. Free inspections, certified crews, and 20+ years of experience.",
         images: ["/assets/shared/og/og-image.jpg"],
     },
 
